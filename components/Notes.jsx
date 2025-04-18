@@ -8,9 +8,7 @@ import { motion } from "motion/react";
 const Notes = () => {
   const [note, setNote] = useState(false);
   const [addNote, setAddNote] = useState([
-    " Spend 30–45 minutes learning a new frontend concept",
-    "Improve a Past Project",
-    "Add a new feature to your existing project",
+   
   ]);
   const [noteValue, setNoteValue] = useState("");
   const [noteIndex, setNoteIndex] = useState(null);

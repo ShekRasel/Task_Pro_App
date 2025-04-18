@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react"
 import {
   DropdownMenu,
@@ -11,8 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { Switch } from "./ui/switch";
+import { useTheme } from "next-themes";
 
 const Profile = () => {
+  const {setTheme,themes} = useTheme();
+  const [theme,setISTheme] = useState(true);
+
   return (
     <DropdownMenu className="border-none">
       <DropdownMenuTrigger className=" border-none outline-none focus:outline-none focus:ring-0">
@@ -22,15 +27,16 @@ const Profile = () => {
           height={500}
           width={500}
           alt="logo"
-          className="rounded-full  h-10 w-10  cursor-pointer"
+          className="rounded-full h-10 w-10  cursor-pointer"
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className=" rounded-none bg-transparent shadow-none pr-4 md:pr-10 xl:pr-24 border-none">
+      <DropdownMenuContent className=" rounded-none  shadow-none pr-4 md:pr-10 xl:pr-24 border-none bg-transparent">
         <motion.div
         initial={{scale:0,opacity:0}}
         animate={{scale:1,opacity:1}}
         transition={{duration:0.6, ease:"easeInOut"}}
-        className="bg-white shadow-md w-56 py-2 rounded-md px-4">
+        
+        className=" shadow-md w-56 py-2 rounded-md px-4 border bg-white text-black">
           <div className="flex flex-col items-center">
             <DropdownMenuLabel>
               {" "}
@@ -52,8 +58,20 @@ const Profile = () => {
           <DropdownMenuItem className="border-t py-2">
             <Link href={"/settings"}>Profile Settings</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem className="border-t py-2">
-            Dark Mode
+          <DropdownMenuItem onSelect={(e)=>e.preventDefault()} className="border-t py-2  flex justify-between cursor-pointer">
+           
+            <h1> Dark Mode</h1>
+            <Switch className='cursor-pointer' onClick={()=>{
+              
+             if(theme){
+              setTheme('dark');
+              setISTheme(false)
+             }else{
+              setTheme('light');
+              setISTheme(true)
+             }
+            }}/>
+           
           </DropdownMenuItem>
         </motion.div>
       </DropdownMenuContent>

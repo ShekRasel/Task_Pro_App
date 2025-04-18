@@ -19,12 +19,12 @@ const Notification = () => {
       </DropdownMenuTrigger>
       
 
-      <DropdownMenuContent className='rounded-none bg-transparent shadow-none pr-4 md:pr-10 xl:pr-24 border-none py-4'>
+      <DropdownMenuContent className='rounded-none  shadow-none pr-4 md:pr-10 xl:pr-24 border-none py-4 bg-transparent'>
         <motion.div
          initial={{scale:0,opacity:0}}
          animate={{scale:1,opacity:1}}
          transition={{duration:0.6, ease:"easeInOut"}}
-        className="bg-white shadow-md w-56 py-2 rounded-md px-4">
+        className=" border shadow-md w-56 py-2 rounded-md px-4 bg-white text-black">
         <DropdownMenuLabel>Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
