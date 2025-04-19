@@ -14,10 +14,10 @@ const Sidebar = () => {
     { link: "/message", name: "Messages", icon: <MessageSquareCode/> },
     { link: "/settings", name: "Settings", icon: <Settings /> },
   ];
-  return <div className="h-screen  border p-6">
+  return <div className="border py-9 px-2 md:p-6">
     <div className="flex gap-2 items-center justify-center lg:justify-start">
-      <Image src={'/logo/logo1.svg'} height={44} width={44} alt="logo"/>
-      <h1 className="text-3xl hidden lg:block">TaskPro</h1>
+      <Image src={'/logo/logo1.svg'} height={44} width={44} alt="logo" className="h-8 w-8 md:h-12 md:w-12"/>
+      <h1 className="text-3xl hidden  lg:block">TaskPro</h1>
     </div>
     <div className="mt-15 flex flex-col gap-10">
       {pages.map((page,index)=>(
