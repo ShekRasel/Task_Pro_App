@@ -1,11 +1,13 @@
 import Sidebar from "@/components/Sidebar";
 import React from "react";
 import Header from "@/components/Header";
+import AddProjectContext from "@/context/AddProjectContext";
 
 const layout = ({ children }) => {
   
   return (
-  
+    <AddProjectContext>
+
       <div className="flex h-screen">
         <Sidebar />
         <div className="flex flex-col flex-1 mt-4 overflow-hidden">
@@ -15,6 +17,8 @@ const layout = ({ children }) => {
           </main>
         </div>
       </div>
+    </AddProjectContext>
+  
     
   );
 };
