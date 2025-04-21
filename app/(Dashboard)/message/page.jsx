@@ -46,8 +46,8 @@ const massage = () => {
   };
 
   return (
-    <div className="w-full border h-full pb-5 md:pb-0 md:h-2/3 mt-2 flex  ">
-      <div className="hidden md:block border w-2/6  ">
+    <div className="w-full md:border  pb-5 md:pb-0 md:h-2/3 mt-2 flex flex-col md:flex-row gap-4 md:gap-0  ">
+      <div className="border md:w-2/6  ">
         <div className="flex justify-between px-3 py-5 border-b items-center">
           <h1 className="text-lg">Message</h1>
           <PlusCircle />
@@ -93,7 +93,7 @@ const massage = () => {
         </div>
       </div>
 
-      <div className=" w-full md:w-4/6 h-full  flex flex-col justify-between pb-2 gap-8 ">
+      <div className=" border md:border-none w-full md:w-4/6 h-full  flex flex-col justify-between pb-2 gap-8 ">
 
         <div className=" w-full h-full ">
           <div className="border flex px-3 py-5 items-center gap-4">
@@ -137,7 +137,7 @@ const massage = () => {
         </div>
 
         {/* Message input */}
-        <div className="px-6 ">
+        <div className="px-2 md:px-6 ">
           <div className="w-full rounded-full border py-1 flex px-3 pr-5">
             <input
               type="text"
