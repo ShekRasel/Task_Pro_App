@@ -14,8 +14,8 @@ const Sidebar = () => {
     { link: "/message", name: "Messages", icon: <MessageSquareCode/> },
     { link: "/settings", name: "Settings", icon: <Settings /> },
   ];
-  return <div className="border py-9 px-2 md:p-6">
-    <div className="flex gap-2 items-center justify-center lg:justify-start">
+  return <div className="border-r md:py-9 px-2 md:p-6">
+    <div className="flex gap-2 py-5 md:py-0 items-center justify-center lg:justify-start">
       <Image src={'/logo/logo1.svg'} height={44} width={44} alt="logo" className="h-8 w-8 md:h-12 md:w-12"/>
       <h1 className="text-3xl hidden  lg:block">TaskPro</h1>
     </div>

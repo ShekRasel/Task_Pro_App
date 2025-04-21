@@ -10,9 +10,9 @@ const layout = ({ children }) => {
 
       <div className="flex h-screen">
         <Sidebar />
-        <div className="flex flex-col flex-1 mt-4 overflow-hidden">
+        <div className="flex flex-col flex-1 md:mt-4 overflow-hidden">
           <Header />
-          <main className="flex-1 mt-2 overflow-y-auto px-3 md:px-10 xl:px-16 2xl:px-20">
+          <main className="flex-1 py-4 overflow-y-auto px-3 md:px-10 xl:px-16 2xl:px-20">
             {children}
           </main>
         </div>
