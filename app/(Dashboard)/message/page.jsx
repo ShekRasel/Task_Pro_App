@@ -46,7 +46,7 @@ const massage = () => {
   };
 
   return (
-    <div className="w-full border h-2/3 mt-2 flex  ">
+    <div className="w-full border h-full pb-5 md:pb-0 md:h-2/3 mt-2 flex  ">
       <div className="hidden md:block border w-2/6  ">
         <div className="flex justify-between px-3 py-5 border-b items-center">
           <h1 className="text-lg">Message</h1>
@@ -93,14 +93,15 @@ const massage = () => {
         </div>
       </div>
 
-      <div className=" w-full md:w-4/6 h-full  flex flex-col justify-between pb-2  ">
-        <div className=" w-full h-full">
+      <div className=" w-full md:w-4/6 h-full  flex flex-col justify-between pb-2 gap-8 ">
+
+        <div className=" w-full h-full ">
           <div className="border flex px-3 py-5 items-center gap-4">
             <FaBarsStaggered className="md:hidden" />
             <h1 className="  text-lg font-semibold">conversation</h1>
           </div>
 
-          <div className="w-full h-10/12 overflow-y-scroll   p-2 ">
+          <div className="w-full h-[420px]  overflow-y-scroll   p-2 ">
             {/* Left-aligned (User message) */}
             <div className="flex gap-2 h-20 w-full  relative mb-4">
               <div className="flex justify-start absolute top-10">
