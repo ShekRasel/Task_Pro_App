@@ -15,9 +15,7 @@ import { Switch } from "./ui/switch";
 import { useTheme } from "next-themes";
 
 const Profile = () => {
-  const {setTheme,themes} = useTheme();
-  const [theme,setISTheme] = useState(true);
-
+  const {setTheme,theme} = useTheme();
   return (
     <DropdownMenu className="border-none">
       <DropdownMenuTrigger className=" border-none outline-none focus:outline-none focus:ring-0">
@@ -61,16 +59,13 @@ const Profile = () => {
           <DropdownMenuItem onSelect={(e)=>e.preventDefault()} className="border-t py-2  flex justify-between cursor-pointer">
            
             <h1> Dark Mode</h1>
-            <Switch className='cursor-pointer' onClick={()=>{
-              
-             if(theme){
-              setTheme('dark');
-              setISTheme(false)
-             }else{
-              setTheme('light');
-              setISTheme(true)
-             }
-            }}/>
+            <Switch className='cursor-pointer' 
+            checked={theme === 'dark'}
+            onCheckedChange={(checked)=>{
+              setTheme(checked ? 'dark' : 'light')
+            }}
+            
+            />
            
           </DropdownMenuItem>
         </motion.div>
