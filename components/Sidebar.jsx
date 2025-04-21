@@ -23,8 +23,8 @@ const Sidebar = () => {
       {pages.map((page,index)=>(
         <div key={index} className="text">
           <Link href={page.link} className="flex gap-2 justify-center lg:justify-start font-semibold">
-          <span>{page.icon}</span>
-          <h1 className={`hidden lg:block ${pathName === page.link && 'text-blue-600'}`}>{page.name}</h1>
+          <span className={`${pathName === page.link && 'text-blue-500'}`}>{page.icon}</span>
+          <h1 className={`hidden lg:block ${pathName === page.link && 'text-blue-500'}`}>{page.name}</h1>
           </Link>
         </div>
       ))}
