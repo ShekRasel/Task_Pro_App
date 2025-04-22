@@ -3,6 +3,7 @@ import { PlusSquare, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import TaskAddInput from "./TaskAddInput";
+import DeleteProgressTask from "./DeleteProgressTask";
 
 const TaskProgress = () => {
   const allTaskTimeLine = [
@@ -62,7 +63,7 @@ const TaskProgress = () => {
               ></h1>
               <h1>{singleTask.progress}</h1>
             </div>
-            <span className="font-bold">...</span>
+            <DeleteProgressTask taskTimeLine={taskTimeLine} setTaskTimeLine={setTaskTimeLine} singleTask={singleTask} index={index}/>
           </div>
 
           <div className="py" />
