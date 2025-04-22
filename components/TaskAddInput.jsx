@@ -1,23 +1,15 @@
-'use client'
-import { useState } from "react";
+import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
+import AddModifySingleTaskProgress from "./AddModifySingleTaskProgress";
 
-const TaskAddInput = ({
-  showInput,
-  index,
-  saveTask,
-  totalTask,
-  inputValue,
-  setInputValue,
-  progress
-}) => {
+const TaskAddInput = ({index,progress}) => {
+  const {showInput,saveTask,inputValue,setInputValue,totalTask} = useCustomProjectContext ();
   return (
     <div className="mt-4">
-      {saveTask && totalTask[progress].length > 0 && (
+      {saveTask && totalTask[progress].addedTask.length > 0 && (
         <div className="flex flex-col gap-4">
-          {totalTask[progress].map((task, index) => (
-            <div key={index} className="bg-[#464C59] py-2 text-white rounded-md cursor-pointer px-4">
-              <h1>{task}</h1>
-            </div>
+          {totalTask[progress].addedTask.map((task, index) => (
+            
+           <AddModifySingleTaskProgress key={index} task={task} progress={progress}/>
           ))}
         </div>
       )}

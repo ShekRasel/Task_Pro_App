@@ -1,45 +1,31 @@
 "use client";
 import { PlusSquare, X } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button } from "./ui/button";
 import TaskAddInput from "./TaskAddInput";
 import DeleteProgressTask from "./DeleteProgressTask";
+import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 
 const TaskProgress = () => {
-  const allTaskTimeLine = [
-    {
-      progress: "Todo",
-      progressColor: "bg-red-500",
-    },
-    {
-      progress: "On Progress",
-      progressColor: "bg-blue-500",
-    },
-    {
-      progress: "OnReview",
-      progressColor: "bg-yellow-500",
-    },
-    {
-      progress: "Done",
-      progressColor: "bg-green-500",
-    },
-  ];
-
-  const [taskTimeLine, setTaskTimeLine] = useState([]);
-  const [showInput, setShowInput] = useState(null);
-  const [saveTask, SetSaveTask] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [totalTask, setTotalTask] = useState({
-    Todo: [],
-    "On Progress": [],
-    OnReview: [],
-    Done: [],
-  });
+  const {
+    taskTimeLine,
+    setTaskTimeLine,
+    showInput,
+    setShowInput,
+    SetSaveTask,
+    inputValue,
+    setInputValue,
+    setTotalTask,
+    allTaskTimeLine,
+  } = useCustomProjectContext();
 
   const addTaskPerProgress = (progress) => {
     setTotalTask((prev) => ({
       ...prev,
-      [progress]: [...prev[progress], inputValue],
+      [progress]: {
+        ...prev[progress],
+        addedTask : [...prev[progress].addedTask, inputValue]
+      }
     }));
     setInputValue("");
     SetSaveTask(true);
@@ -63,7 +49,9 @@ const TaskProgress = () => {
               ></h1>
               <h1>{singleTask.progress}</h1>
             </div>
-            <DeleteProgressTask taskTimeLine={taskTimeLine} setTaskTimeLine={setTaskTimeLine} singleTask={singleTask} index={index}/>
+            <DeleteProgressTask
+              singleTask={singleTask}
+            />
           </div>
 
           <div className="py" />
@@ -72,12 +60,6 @@ const TaskProgress = () => {
 
           <TaskAddInput
             index={index}
-            showInput={showInput}
-            saveTask={saveTask}
-            setTotalTask={setTotalTask}
-            totalTask={totalTask}
-            setInputValue={setInputValue}
-            inputValue={inputValue}
             progress={singleTask.progress}
           />
 

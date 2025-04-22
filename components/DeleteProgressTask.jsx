@@ -6,13 +6,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 
-const DeleteProgressTask = ({
-  setTaskTimeLine,
-  taskTimeLine,
-  singleTask,
-  index,
-}) => {
+const DeleteProgressTask = ({singleTask}) => {
+  const {taskTimeLine,setTaskTimeLine} = useCustomProjectContext ();
+
   const deleteProgressTask = () => {
     const newProgressTask = taskTimeLine.filter((filterTask) => {
       return filterTask !== singleTask;
