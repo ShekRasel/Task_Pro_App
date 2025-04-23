@@ -5,16 +5,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ListTodo, MessageSquare, Tag, Timer, Trash, X } from "lucide-react";
-import { MdAttachment, MdOutlinePerson } from "react-icons/md";
 import { FaBarsStaggered } from "react-icons/fa6";
-import Image from "next/image";
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
-import { useState } from "react";
-import { Button } from "./ui/button";
 import TaskComments from "./TaskComments";
+import RemoveProgressTask from "./RemoveProgressTask";
 
-const AddModifySingleTaskProgress = ({ task, progress }) => {
+const AddModifySingleTaskProgress = ({ task, progress,taskId }) => {
   const {
     taskTimeLine,
     setTaskTimeLine,
@@ -30,20 +26,11 @@ const AddModifySingleTaskProgress = ({ task, progress }) => {
   } = useCustomProjectContext();
 
 
-  const ModificationButton = [
-    { icon: <MdOutlinePerson className="h-5 w-5" />, Name: "Members" },
-    { icon: <Tag className="h-5 w-5" />, Name: "Tags" },
-    { icon: <Timer className="h-5 w-5" />, Name: "Date" },
-    { icon: <MdAttachment className="h-5 w-5" />, Name: "Attachment" },
-    { icon: <ListTodo className="h-5 w-5" />, Name: "Todo List" },
-    { icon: <Trash className="h-5 w-5" />, Name: "Delete" },
-  ];
-
   return (
     <Dialog>
       <DialogTrigger>
         <div className="bg-[#464C59] py-2 text-white rounded-md cursor-pointer px-4">
-          <h1>{task}</h1>
+          <h1 className="text-start">{task}</h1>
         </div>
       </DialogTrigger>
       <DialogContent className="md:min-w-3xl lg:min-w-4xl">
@@ -66,19 +53,11 @@ const AddModifySingleTaskProgress = ({ task, progress }) => {
               ></textarea>
             </div>
             {/* comments area */}
-            <TaskComments progress={progress}/>
+            <TaskComments progress={progress} taskId={taskId}/>
           </div>
 
-          <div className="flex flex-col gap-6">
-            {ModificationButton.map((button, index) => (
-              <h1
-                key={index}
-                className="flex gap-2 py-1 items-center px-2 rounded-sm bg-[#464C59] text-white text-sm "
-              >
-                <span>{button.icon}</span> <span>{button.Name}</span>
-              </h1>
-            ))}
-          </div>
+          {/* modification buttons */}
+          <RemoveProgressTask progress={progress} taskId={taskId}/>
         </div>
       </DialogContent>
     </Dialog>

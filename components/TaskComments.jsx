@@ -4,31 +4,68 @@ import React from "react";
 import { Button } from "./ui/button";
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 
-const TaskComments = ({progress}) => {
-   const  {delMessageIndex,setDelMessageIndex,messages,setMessages,totalTask,setTotalTask,setMessageState} = useCustomProjectContext();
+const TaskComments = ({ progress, taskId }) => {
+  const {
+    delMessageIndex,
+    setDelMessageIndex,
+    messages,
+    setMessages,
+    totalTask,
+    setTotalTask,
+    setMessageState,
+  } = useCustomProjectContext();
 
-   const messageDelete = (index)=>{
-    const afterDeleteMessage = totalTask[progress].addedMessages.filter((filteredMessage)=>{
-        return filteredMessage !== totalTask[progress].addedMessages[index]
-    })
+  const commentsDelete = (indexToDelete) => {
+    setTotalTask((prev)=>{
 
-    setTotalTask((prev) => ({
+      const updatedTasks = prev[progress].addedTask.map((task) => {
+        if (task.id === taskId) {
+          const updatedComments = task.comments.filter(
+            (_, index) => index !== indexToDelete
+          );
+          return {
+            ...task,
+            comments: updatedComments,
+          };
+        }
+        return task;
+      });
+      
+      return {
         ...prev,
         [progress]: {
           ...prev[progress],
-          addedMessages: afterDeleteMessage,
+          addedTask: updatedTasks,
         },
-      }));
-  }
+      };
+    })
+  };
 
-  const messageAdded = () => {
-    setTotalTask((prev) => ({
-      ...prev,
-      [progress]: {
-        ...prev[progress],
-        addedMessages: [...prev[progress].addedMessages, messages],
-      },
-    }));
+  const commentsAdded = () => {
+    const newMessage = {
+      id: Date.now(),
+      text: messages,
+      time: new Date().toLocaleTimeString(),
+    };
+
+    setTotalTask((prev) => {
+      const updatedTasks = prev[progress].addedTask.map((task) => {
+        if (task.id === taskId) {
+          return {
+            ...task,
+            comments: [...task.comments, newMessage],
+          };
+        }
+        return task;
+      });
+
+      return {
+        ...prev,
+        [progress]: {
+          addedTask: updatedTasks,
+        },
+      };
+    });
 
     setMessages("");
     setMessageState(false);
@@ -61,42 +98,44 @@ const TaskComments = ({progress}) => {
         <div className="mt-2 flex gap-2 items-center justify-end">
           <Button
             className="bg-blue-400 hover:bg-blue-400 cursor-pointer rounded-none text-white"
-            onClick={messageAdded}
+            onClick={commentsAdded}
           >
             Add
           </Button>
         </div>
       )}
 
-      {totalTask[progress].addedMessages.map((singleMessage, index) => (
-        <div key={index} className="flex gap-2 w-full mt-4">
-          <Image
-            src={"/images/profile.jpg"}
-            height={500}
-            width={500}
-            alt="logo"
-            className="rounded-full h-9 w-9  cursor-pointer"
-          />
-          <div
-            onMouseEnter={() => setDelMessageIndex(index)}
-            onMouseLeave={() => setDelMessageIndex(null)}
-            className="w-full"
-          >
-            <div className="flex gap-2.5 w-full justify-between">
-              <h1 className="text-sm">Mr Jhon</h1>
-              {delMessageIndex === index && (
-                <Trash
-                  className="h-4 w-4 text-red-500 cursor-pointer"
-                  onClick={() => messageDelete(index)}
-                />
-              )}
+      {totalTask[progress].addedTask
+        .find((task) => task.id === taskId)
+        ?.comments.map((singleComment, index) => (
+          <div key={index} className="flex gap-2 w-full mt-4">
+            <Image
+              src={"/images/profile.jpg"}
+              height={500}
+              width={500}
+              alt="logo"
+              className="rounded-full h-9 w-9  cursor-pointer"
+            />
+            <div
+              onMouseEnter={() => setDelMessageIndex(index)}
+              onMouseLeave={() => setDelMessageIndex(null)}
+              className="w-full"
+            >
+              <div className="flex gap-2.5 w-full justify-between">
+                <h1 className="text-sm">Mr Jhon</h1>
+                {delMessageIndex === index && (
+                  <Trash
+                    className="h-4 w-4 text-red-500 cursor-pointer"
+                    onClick={() => commentsDelete(index)}
+                  />
+                )}
+              </div>
+              <h1 className="bg-[#464C59] px-2 py-1.5 w-full mt-1 text-white">
+                {singleComment.text}
+              </h1>
             </div>
-            <h1 className="bg-[#464C59] px-2 py-1.5 w-full mt-1">
-              {singleMessage}
-            </h1>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };

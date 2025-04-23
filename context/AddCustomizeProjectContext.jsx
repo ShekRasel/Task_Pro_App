@@ -29,11 +29,14 @@ const AddCustomizeProjectContext = ({ children }) => {
   const [messages, setMessages] = useState("");
   const [messageState, setMessageState] = useState(false);
   const [totalTask, setTotalTask] = useState({
-    Todo: {addedTask : [], addedMessages: []},
-    "On Progress": {addedTask : [], addedMessages: []},
-    OnReview:{addedTask : [], addedMessages: []},
-    Done: {addedTask : [], addedMessages: []},
+    Todo: { addedTask: [] },
+    "On Progress": { addedTask: [] },
+    OnReview: { addedTask: [] },
+    Done: { addedTask: [] }
   });
+
+
+
   return (
     <CustomProjectContext.Provider
       value={{
@@ -52,7 +55,7 @@ const AddCustomizeProjectContext = ({ children }) => {
         setDelMessageIndex,
         messages,
         setMessages,
-        setMessageState
+        setMessageState,
       }}
     >
       {children}

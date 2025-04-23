@@ -20,11 +20,15 @@ const TaskProgress = () => {
   } = useCustomProjectContext();
 
   const addTaskPerProgress = (progress) => {
+    const newTask = {
+      id : Date.now(),
+      task : inputValue,
+      comments : []
+    }
     setTotalTask((prev) => ({
       ...prev,
       [progress]: {
-        ...prev[progress],
-        addedTask : [...prev[progress].addedTask, inputValue]
+        addedTask : [...prev[progress].addedTask, newTask]
       }
     }));
     setInputValue("");

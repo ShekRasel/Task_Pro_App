@@ -7,9 +7,9 @@ const TaskAddInput = ({index,progress}) => {
     <div className="mt-4">
       {saveTask && totalTask[progress].addedTask.length > 0 && (
         <div className="flex flex-col gap-4">
-          {totalTask[progress].addedTask.map((task, index) => (
+          {totalTask[progress].addedTask.map((tasks, index) => (
             
-           <AddModifySingleTaskProgress key={index} task={task} progress={progress}/>
+           <AddModifySingleTaskProgress key={index} task={tasks.task} progress={progress} taskId={tasks.id}/>
           ))}
         </div>
       )}
