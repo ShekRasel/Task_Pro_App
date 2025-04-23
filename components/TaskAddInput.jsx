@@ -4,9 +4,9 @@ import AddModifySingleTaskProgress from "./AddModifySingleTaskProgress";
 const TaskAddInput = ({index,progress}) => {
   const {showInput,saveTask,inputValue,setInputValue,totalTask} = useCustomProjectContext ();
   return (
-    <div className="mt-4">
+    <div className="mt-4 w-full">
       {saveTask && totalTask[progress].addedTask.length > 0 && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3.5 w-full">
           {totalTask[progress].addedTask.map((tasks, index) => (
             
            <AddModifySingleTaskProgress key={index} task={tasks.task} progress={progress} taskId={tasks.id}/>

@@ -21,15 +21,16 @@ const TaskProgress = () => {
 
   const addTaskPerProgress = (progress) => {
     const newTask = {
-      id : Date.now(),
-      task : inputValue,
-      comments : []
-    }
+      id: Date.now(),
+      task: inputValue,
+      comments: [],
+      descriptions: [],
+    };
     setTotalTask((prev) => ({
       ...prev,
       [progress]: {
-        addedTask : [...prev[progress].addedTask, newTask]
-      }
+        addedTask: [...prev[progress].addedTask, newTask],
+      },
     }));
     setInputValue("");
     SetSaveTask(true);
@@ -44,7 +45,7 @@ const TaskProgress = () => {
       {taskTimeLine.map((singleTask, index) => (
         <div
           key={index}
-          className="border border-blue-500 min-w-72 lg:min-w-[350px] p-3 rounded-md flex flex-col max-h-[80vh]"
+          className="border border-blue-500 min-w-72  lg:min-w-[350px] overflow-x-auto p-3 rounded-md flex flex-col max-h-[80vh]"
         >
           <div className="flex justify-between">
             <div className="flex gap-1 items-center">
@@ -53,19 +54,16 @@ const TaskProgress = () => {
               ></h1>
               <h1>{singleTask.progress}</h1>
             </div>
-            <DeleteProgressTask
-              singleTask={singleTask}
-            />
+            <DeleteProgressTask singleTask={singleTask} />
           </div>
 
           <div className="py" />
 
           {/* after clicking add task show the input  */}
 
-          <TaskAddInput
-            index={index}
-            progress={singleTask.progress}
-          />
+          <div className="w-full ">
+          <TaskAddInput index={index} progress={singleTask.progress} />
+          </div>
 
           {/* click to add task */}
 
