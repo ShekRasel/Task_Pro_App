@@ -2,7 +2,6 @@ import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import { ListTodo, Tag, Timer, Trash } from "lucide-react";
 import React, { useState } from "react";
 import { MdAttachment, MdOutlinePerson } from "react-icons/md";
-import { Calendar } from "./ui/calendar";
 import { Button } from "./ui/button";
 import Date from "./DatePicker";
 import DatePicker from "./DatePicker";

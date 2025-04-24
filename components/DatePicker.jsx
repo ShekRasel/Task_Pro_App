@@ -1,14 +1,15 @@
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import React, { useState } from "react";
-import { Calendar } from "./ui/calendar";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "./ui/button";
 
 const DatePicker = ({ setDateState, progress, taskId }) => {
   const { setTotalTask } = useCustomProjectContext();
-  const [date, setDate] = useState(null); 
+  const [date, setDate] = useState(null);
 
   const handleOkClick = () => {
-    if (!date) return; 
+    if (!date) return;
 
     const projectDate = new Date(date).toDateString();
 
@@ -36,26 +37,31 @@ const DatePicker = ({ setDateState, progress, taskId }) => {
   };
 
   return (
-    <div className="absolute top-34 md:right-0 bg-white text-black">
-      <Calendar
-        mode="single"
+    <div className="absolute top-34 md:right-0 bg-white text-black  rounded shadow-md z-50">
+      <ReactDatePicker
         selected={date}
-        onSelect={setDate}
-        className="bg-white"
+        onChange={(newDate) => setDate(newDate)}
+        className="w-full border px-2 py-1 rounded text-black"
+        calendarClassName="bg-white"
+        popperPlacement="top-start"
+        inline
       />
-      <div className="flex justify-between">
 
-      <Button
-        className="rounded-none bg-white text-black cursor-pointer hover:bg-white border shadow-lg"
-        onClick={handleOkClick}
-        disabled={!date} // prevent clicking without selecting
-      >
-       Ok
-      </Button>
+      <div className="flex justify-between mt-2">
+        <Button
+          className="rounded-none bg-white text-black cursor-pointer hover:bg-white border shadow"
+          onClick={handleOkClick}
+          disabled={!date}
+        >
+          Ok
+        </Button>
 
-      <Button className='rounded-none bg-white text-black hover:bg-white cursor-pointer  border shadow-lg ' onClick={()=>setDateState(false)}>
-        X
-      </Button>
+        <Button
+          className="rounded-none bg-white text-black hover:bg-white cursor-pointer border shadow"
+          onClick={() => setDateState(false)}
+        >
+          X
+        </Button>
       </div>
     </div>
   );
