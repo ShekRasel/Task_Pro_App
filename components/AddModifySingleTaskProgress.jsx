@@ -8,17 +8,25 @@ import {
 import TaskComments from "./TaskComments";
 import RemoveProgressTask from "./RemoveProgressTask";
 import DescriptionAddedArea from "./DescriptionAddedArea";
+import Members from "./Members";
+import Date from "./DatePicker";
+import { MessageSquare } from "lucide-react";
+import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
+import ShowTask from "./ShowTask";
 
 const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
-  
   return (
-    
-     
-    <Dialog className=''>
+    <Dialog className="">
       <DialogTrigger>
-        <div className=" py-1.5  rounded-md cursor-pointer px-4  w-full bg-[#464C59] text-white">
-          <h1 className="text-start w-full">{task}</h1>
-        </div>
+        {/* task will be show */}
+        <ShowTask
+          task={task}
+          progress={progress}
+          taskId={taskId}
+          block={"block"}
+          bg={"bg-[#464C59] px-4"}
+          flex={"justify-between text-white"}
+        />
       </DialogTrigger>
       <DialogContent className="md:min-w-3xl lg:min-w-4xl max-w-4xl">
         <DialogHeader>
@@ -26,27 +34,30 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
         </DialogHeader>
         <div className="  flex flex-col md:flex-row justify-between gap-4 lg:gap-8 ">
           <div className=" md:w-5/6">
-
-            <div>
-              {/* description added area */}
-              <div className="w-full">
-
+            <ShowTask
+              task={task}
+              progress={progress}
+              taskId={taskId}
+              hidden={"hidden"}
+              bg={"bg-none "}
+              flex={"text-black"}
+            />
+            {/* description added area */}
+            <div className="w-full mt-2">
               <DescriptionAddedArea progress={progress} taskId={taskId} />
-              </div>
             </div>
+
             {/* comments area */}
             <TaskComments progress={progress} taskId={taskId} />
           </div>
 
           {/* modification buttons */}
           <div className="md:w-1/6">
-
-          <RemoveProgressTask progress={progress} taskId={taskId} />
+            <RemoveProgressTask progress={progress} taskId={taskId} />
           </div>
         </div>
       </DialogContent>
     </Dialog>
-
   );
 };
 
