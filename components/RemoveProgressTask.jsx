@@ -5,6 +5,7 @@ import { MdAttachment, MdOutlinePerson } from "react-icons/md";
 import { Button } from "./ui/button";
 import Date from "./DatePicker";
 import DatePicker from "./DatePicker";
+import TagPicker from "./TagPicker";
 
 const RemoveProgressTask = ({ progress, taskId }) => {
   const {
@@ -20,6 +21,11 @@ const RemoveProgressTask = ({ progress, taskId }) => {
     setTotalTask,
     allTaskTimeLine,
     setProjectDate,
+    setDateState,
+    setTagState,
+    tagState,
+    dateState
+
   } = useCustomProjectContext();
 
   const ModificationButton = [
@@ -31,10 +37,11 @@ const RemoveProgressTask = ({ progress, taskId }) => {
     { icon: <Trash className="h-5 w-5" />, Name: "Delete", id: 6 },
   ];
 
-  const [dateState, setDateState] = useState(false);
-
   const modifyPerProgressTask = (id, index) => {
     switch (id) {
+      case 2:
+        setTagState(true);
+        break;
       case 3:
         setDateState(true);
         break;
@@ -61,8 +68,10 @@ const RemoveProgressTask = ({ progress, taskId }) => {
   return (
     <div className="flex flex-col gap-6 relative">
 
+      {/* choose tags */}
+      {tagState && <TagPicker progress={progress} taskId={taskId}/>}
       {/* choose date */}
-      {dateState && <DatePicker setDateState={setDateState} progress={progress} taskId={taskId}/>}
+      {dateState && <DatePicker  progress={progress} taskId={taskId}/>}
 
       {ModificationButton.map((button, index) => (
         <h1

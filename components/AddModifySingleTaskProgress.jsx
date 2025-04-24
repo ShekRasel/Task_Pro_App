@@ -26,6 +26,8 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
           block={"block"}
           bg={"bg-[#464C59] px-4"}
           flex={"justify-between text-white"}
+          order1 = {'order-1'}
+          order2 = {'order-2'}
         />
       </DialogTrigger>
       <DialogContent className="md:min-w-3xl h-9/10 md:h-1/2 overflow-y-scroll lg:min-w-4xl md:max-w-4xl  sm:max-w-[500px] ">
@@ -41,6 +43,8 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
               hidden={"hidden"}
               bg={"bg-none "}
               flex={"text-black"}
+              order1 = {'order-2'}
+          order2 = {'order-1'}
             />
             {/* description added area */}
             <div className="w-full mt-2">

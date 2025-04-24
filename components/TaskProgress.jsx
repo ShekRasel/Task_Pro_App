@@ -26,6 +26,8 @@ const TaskProgress = () => {
       comments: [],
       descriptions: [],
       date : '',
+      attachment :[],
+      tags : []
     };
     setTotalTask((prev) => ({
       ...prev,

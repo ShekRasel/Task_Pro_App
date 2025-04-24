@@ -32,10 +32,11 @@ const AddCustomizeProjectContext = ({ children }) => {
     Todo: { addedTask: [] },
     "On Progress": { addedTask: [] },
     OnReview: { addedTask: [] },
-    Done: { addedTask: [] }
+    Done: { addedTask: [] },
   });
 
-
+  const [dateState, setDateState] = useState(false);
+  const [tagState, setTagState] = useState(false);
 
   return (
     <CustomProjectContext.Provider
@@ -56,6 +57,10 @@ const AddCustomizeProjectContext = ({ children }) => {
         messages,
         setMessages,
         setMessageState,
+        dateState,
+        setDateState,
+        tagState,
+        setTagState,
       }}
     >
       {children}
