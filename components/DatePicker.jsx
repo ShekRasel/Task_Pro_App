@@ -4,8 +4,8 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "./ui/button";
 
-const DatePicker = ({ setDateState, progress, taskId }) => {
-  const { setTotalTask } = useCustomProjectContext();
+const DatePicker = ({ progress, taskId, }) => {
+  const { setTotalTask,setDateState } = useCustomProjectContext();
   const [date, setDate] = useState(null);
 
   const handleOkClick = () => {
