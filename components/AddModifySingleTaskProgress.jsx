@@ -28,7 +28,7 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
           flex={"justify-between text-white"}
         />
       </DialogTrigger>
-      <DialogContent className="md:min-w-3xl lg:min-w-4xl max-w-4xl">
+      <DialogContent className="md:min-w-3xl lg:min-w-4xl md:max-w-4xl  sm:max-w-[500px] h-auto">
         <DialogHeader>
           <DialogTitle>{task}</DialogTitle>
         </DialogHeader>

@@ -37,11 +37,11 @@ const DatePicker = ({ setDateState, progress, taskId }) => {
   };
 
   return (
-    <div className="absolute top-34 md:right-0 bg-white text-black  rounded shadow-md z-50">
+    <div className="absolute -top-48 md:top-34 md:right-0 bg-white text-black  rounded shadow-md z-50">
       <ReactDatePicker
         selected={date}
         onChange={(newDate) => setDate(newDate)}
-        className="w-full border px-2 py-1 rounded text-black"
+        className="w-full border  py-1 rounded text-black"
         calendarClassName="bg-white"
         popperPlacement="top-start"
         inline
