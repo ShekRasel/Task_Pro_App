@@ -25,6 +25,7 @@ const TaskProgress = () => {
       task: inputValue,
       comments: [],
       descriptions: [],
+      date : '',
     };
     setTotalTask((prev) => ({
       ...prev,
