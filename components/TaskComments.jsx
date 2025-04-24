@@ -114,7 +114,7 @@ const TaskComments = ({ progress, taskId }) => {
               height={500}
               width={500}
               alt="logo"
-              className="rounded-full h-9 w-9  cursor-pointer"
+              className="rounded-full h-7 w-7  cursor-pointer"
             />
             <div
               onMouseEnter={() => setDelMessageIndex(index)}
@@ -130,7 +130,7 @@ const TaskComments = ({ progress, taskId }) => {
                   />
                 )}
               </div>
-              <h1 className="bg-[#464C59] px-2 py-1.5 w-full mt-1 text-white">
+              <h1 className="bg-[#858581] px-2 py-1.5 w-full mt-1 text-white">
                 {singleComment.text}
               </h1>
             </div>
