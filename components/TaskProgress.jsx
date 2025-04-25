@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import TaskAddInput from "./TaskAddInput";
 import DeleteProgressTask from "./DeleteProgressTask";
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
-
+import { useTheme } from 'next-themes';
 const TaskProgress = () => {
   const {
     taskTimeLine,
@@ -18,6 +18,7 @@ const TaskProgress = () => {
     setTotalTask,
     allTaskTimeLine,
   } = useCustomProjectContext();
+  const { theme } = useTheme();
 
   const addTaskPerProgress = (progress) => {
     const newTask = {
@@ -27,7 +28,9 @@ const TaskProgress = () => {
       descriptions: [],
       date : '',
       attachment :[],
-      tags : []
+      tags : [],
+      todo : [],
+      member: []
     };
     setTotalTask((prev) => ({
       ...prev,
@@ -44,11 +47,11 @@ const TaskProgress = () => {
   }, []);
 
   return (
-    <div className=" overflow-y-scroll overflow-x-scroll py-2 items-start flex gap-4">
+    <div className="overflow-y-scroll grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 md:gap-5 2xl:gap-10 items-start">
       {taskTimeLine.map((singleTask, index) => (
         <div
           key={index}
-          className="border border-blue-500 min-w-72  lg:min-w-[350px] overflow-x-auto p-3 rounded-md flex flex-col max-h-[80vh]"
+          className={` rounded-md shadow-md p-4 h-auto  ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white'}`}
         >
           <div className="flex justify-between">
             <div className="flex gap-1 items-center">
@@ -73,7 +76,7 @@ const TaskProgress = () => {
           {showInput === index ? (
             <div className="w-full flex gap-4 mt-4 items-center">
               <Button
-                className="bg-blue-500 rounded-sm cursor-pointer hover:bg-blue-400 text-white"
+                className=" rounded-xs cursor-pointer"
                 onClick={() => {
                   setShowInput(null);
                   addTaskPerProgress(singleTask.progress);
@@ -82,13 +85,13 @@ const TaskProgress = () => {
                 Add Task
               </Button>
               <X
-                className="cursor-pointer"
+                className="cursor-pointer hover:text-red-400"
                 onClick={() => setShowInput(null)}
               />
             </div>
           ) : (
             <div
-              className=" flex justify-center gap-1.5 text-gray-500 py-6 cursor-pointer"
+              className=" flex justify-center gap-1.5  pt-6 cursor-pointer"
               onClick={() => setShowInput(index)}
             >
               <PlusSquare />

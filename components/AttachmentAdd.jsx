@@ -39,7 +39,7 @@ const AttachmentAdd = ({ progress, taskId }) => {
   return (
     <div>
       {attachment.length > 0 && (
-        <div className="mt-4">
+        <div className="mt-12">
           <div className="flex gap-1.5 items-center">
             <MdAttachment className="h-7 w-7 -rotate-40" />
             <h1 className="text-lg font-bold">Attachments</h1>
@@ -60,11 +60,11 @@ const AttachmentAdd = ({ progress, taskId }) => {
                   className="rounded-md"
 
                 />
-                <h1>{singleAttachment.name}</h1>
+                <h1 className="text-sm font-semibold">{singleAttachment.name}</h1>
               </div>
               {delAttachmentIndex === index && (
                 <div className="pr-2">
-                  <Trash2 className="text-red-500 cursor-pointer" onClick={() => deleteAttachment(index)}/>
+                  <Trash2 className="text-red-400 cursor-pointer h-5 w-5" onClick={() => deleteAttachment(index)}/>
                 </div>
               )}
             </div>

@@ -5,6 +5,8 @@ import Members from "./Members";
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import Image from "next/image";
 
+import { useTheme } from 'next-themes';
+
 const ShowTask = ({
   task,
   taskId,
@@ -16,6 +18,7 @@ const ShowTask = ({
   order2,
 }) => {
   const { totalTask } = useCustomProjectContext();
+  const { theme } = useTheme();
 
   const commentsLength =
     totalTask[progress].addedTask.find((task) => task.id === taskId)?.comments
@@ -31,7 +34,7 @@ const ShowTask = ({
 
   return (
     <div
-      className={`py-1.5  rounded-md cursor-pointer   w-full  text-white ${bg}`}
+      className={`py-1.5  rounded-md cursor-pointer   w-full  ${bg}  ${theme === 'dark' ? 'bg-[#464C59]' : 'bg-white '}`}
     >
       <h1 className={`text-start font-semibold w-full ${hidden} block`}>
         {task}
@@ -45,8 +48,9 @@ const ShowTask = ({
                 key={index}
                 className={`border px-2`}
                 style={{
-                  color: singleTags.color,
-                  borderColor: singleTags.color,
+                  backgroundColor: singleTags.color,
+                  color: "#111",
+                 borderColor: singleTags.color,
                 }}
               >
                 {singleTags.text}

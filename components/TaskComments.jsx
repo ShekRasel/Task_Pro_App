@@ -72,7 +72,7 @@ const TaskComments = ({ progress, taskId }) => {
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-12">
       <div className="flex items-center gap-2">
         <MessageSquare />
         <h1 className="font-semibold text-lg">Comments</h1>
@@ -86,7 +86,7 @@ const TaskComments = ({ progress, taskId }) => {
           className="rounded-full h-9 w-9  cursor-pointer"
         />
         <textarea
-          className="bg-[#464C59]  rounded-sm focus:outline-none focus:ring-1  focus:ring-blue-400 px-4 py-1.5 text-white text-sm  w-full h-9"
+          className="  rounded-sm focus:outline-none focus:ring-1  border px-4 py-1.5 text-sm  w-full h-9"
           placeholder="Type a comment ...."
           value={messages}
           onChange={(e) => {
@@ -97,7 +97,7 @@ const TaskComments = ({ progress, taskId }) => {
       {messages && (
         <div className="mt-2 flex gap-2 items-center justify-end">
           <Button
-            className="bg-blue-400 hover:bg-blue-400 cursor-pointer rounded-none text-white"
+            className=" cursor-pointer rounded-xs"
             onClick={commentsAdded}
           >
             Add
@@ -125,12 +125,12 @@ const TaskComments = ({ progress, taskId }) => {
                 <h1 className="text-sm">Mr Jhon</h1>
                 {delMessageIndex === index && (
                   <Trash
-                    className="h-4 w-4 text-red-500 cursor-pointer"
+                    className="h-4 w-4 text-red-400 cursor-pointer"
                     onClick={() => commentsDelete(index)}
                   />
                 )}
               </div>
-              <h1 className="bg-[#858581] px-2 py-1.5 w-full mt-1 text-white">
+              <h1 className=" px-2 py-1.5 w-full mt-1 border">
                 {singleComment.text}
               </h1>
             </div>

@@ -11,7 +11,7 @@ import {
 import { Button } from "./ui/button";
 import FileUploader from "./FileUploader";
 import { useAddProjectContext } from "@/context/AddProjectContext";
-
+import { useTheme } from 'next-themes';
 const AddProject = () => {
   const {
     projectName,
@@ -31,6 +31,11 @@ const AddProject = () => {
   const [date, setDate] = useState(null);
   const [member, setMember] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
+  
+
+const { theme } = useTheme();
+
+
 
   useEffect(() => {
     input && setProjectName(input);
@@ -64,14 +69,14 @@ const AddProject = () => {
   };
   return (
     <Dialog className="" open={openDialog} onOpenChange={setOpenDialog}>
-      <DialogTrigger className="border w-full md:w-1/2 h-44 rounded-md">
+      <DialogTrigger className={`border w-full md:w-1/2 h-44 rounded-md ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white'}`}>
         <div className=" cursor-pointer gap-4 flex flex-col items-center justify-center">
-          <Plus className="rounded-full w-8 h-8  flex items-center justify-center border-3 p-1" />
+          <Plus className="rounded-full w-8 h-8  flex items-center justify-center border-3 p-1 border-green-400" />
           <h1 className="font-semibold text-xl">New Project</h1>
         </div>
       </DialogTrigger>
 
-      <DialogContent className="w-4/5  border">
+      <DialogContent className={`w-4/5  border ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white'}`}>
         <DialogTitle className="border-b pb-4">New Project</DialogTitle>
         <div className="flex justify-center">
           <FileUploader />

@@ -1,3 +1,4 @@
+'use client'
 import {
   Dialog,
   DialogContent,
@@ -16,11 +17,16 @@ import ShowTask from "./ShowTask";
 import Image from "next/image";
 import { MdAttachment } from "react-icons/md";
 import AttachmentAdd from "./AttachmentAdd";
+import TodoAdder from "./TodoAdder";
+import { useTheme } from 'next-themes';
 
 const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
+  const { theme } = useTheme();
+ 
+  
 
   return (
-    <Dialog className="">
+    <Dialog >
       <DialogTrigger>
         {/* task will be show */}
         <ShowTask
@@ -28,25 +34,25 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
           progress={progress}
           taskId={taskId}
           block={"block"}
-          bg={"bg-[#464C59] px-4"}
-          flex={"justify-between text-white"}
+          bg={"px-4 border"}
+          flex={"justify-between"}
           order1={"order-1"}
           order2={"order-2"}
         />
       </DialogTrigger>
-      <DialogContent className="md:min-w-3xl h-9/10 md:h-1/2 overflow-y-scroll lg:min-w-4xl md:max-w-4xl  sm:max-w-[500px] ">
+      <DialogContent className={`md:min-w-3xl h-9/10 md:h-1/2 overflow-y-scroll lg:min-w-4xl md:max-w-4xl  sm:max-w-[500px] ${theme === 'dark' ? 'bg-[#464C59]' : 'bg-white border'}`}>
         <DialogHeader>
           <DialogTitle className="text-start">{task}</DialogTitle>
         </DialogHeader>
-        <div className=" flex flex-col md:flex-row justify-between gap-4 lg:gap-8 ">
+        <div className={`flex flex-col md:flex-row justify-between gap-4 lg:gap-8 `}>
           <div className=" md:w-5/6">
             <ShowTask
               task={task}
               progress={progress}
               taskId={taskId}
               hidden={"hidden"}
-              bg={"bg-none "}
-              flex={"text-black"}
+              bg={" "}
+              flex={""}
               order1={"order-2"}
               order2={"order-1"}
             />
@@ -54,6 +60,10 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
             <div className="w-full mt-2">
               <DescriptionAddedArea progress={progress} taskId={taskId} />
             </div>
+
+            {/* todo adder */}
+
+            <TodoAdder progress={progress} taskId={taskId}/>
 
             {/* attachment area */}
 

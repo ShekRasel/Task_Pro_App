@@ -71,11 +71,11 @@ const DescriptionAddedArea = ({ progress, taskId }) => {
             {descriptFinder.descriptions.map((descript, index) => (
               <div
                 key={index}
-                className=" border  min-h-30 bg-[#464C59] p-2 mt-2 rounded-sm flex justify-between gap-3 "
+                className=" border   p-2 mt-2 rounded flex justify-between gap-3 "
               >
-                <p className="text-sm text-white">{descript}</p>
+                <p className="text-sm ">{descript}</p>
                 <PenBoxIcon
-                  className="w-12  text-white cursor-pointer "
+                  className=" hover:text-green-500 w-5 h-5 cursor-pointer "
                   onClick={deleteDrescription}
                 />
               </div>
@@ -84,7 +84,7 @@ const DescriptionAddedArea = ({ progress, taskId }) => {
         ) : (
           <div className=" mt-2 ">
             <textarea
-              className="bg-[#464C59] min-h-30   rounded-sm focus:outline-none focus:ring-1  focus:ring-blue-400 px-4 py-4 text-white  w-full"
+              className=" min-h-30   rounded-sm focus:outline-none focus:ring-1   px-4 py-4 border w-full"
               placeholder="Add a description ...."
               value={inputVal}
               onChange={(e) => {
@@ -94,7 +94,7 @@ const DescriptionAddedArea = ({ progress, taskId }) => {
             <div className="flex justify-end">
               {inputVal && (
                 <Button
-                  className="bg-blue-400 hover:bg-blue-400 cursor-pointer rounded-none text-white"
+                  className=" cursor-pointer rounded-xs"
                   onClick={addDescriptions}
                 >
                   Add

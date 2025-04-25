@@ -37,19 +37,19 @@ const DatePicker = ({ progress, taskId, }) => {
   };
 
   return (
-    <div className="absolute -top-48 md:top-34 md:right-0 bg-white text-black  rounded shadow-md z-50">
+    <div className="absolute -top-48 md:top-34 md:right-0 bg-white text-black   shadow-md z-50">
       <ReactDatePicker
         selected={date}
         onChange={(newDate) => setDate(newDate)}
-        className="w-full border  py-1 rounded text-black"
-        calendarClassName="bg-white"
+        className="w-full  text-black "
+        calendarClassName="bg-white  !border-none shadow-none"
         popperPlacement="top-start"
         inline
       />
 
-      <div className="flex justify-between mt-2">
+      <div className="flex justify-between">
         <Button
-          className="rounded-none bg-white text-black cursor-pointer hover:bg-white border shadow"
+          className="rounded-none bg-white text-black cursor-pointer hover:bg-white border  hover:text-green-500"
           onClick={handleOkClick}
           disabled={!date}
         >
@@ -57,7 +57,7 @@ const DatePicker = ({ progress, taskId, }) => {
         </Button>
 
         <Button
-          className="rounded-none bg-white text-black hover:bg-white cursor-pointer border shadow"
+          className="rounded-none bg-white text-black hover:bg-white cursor-pointer border   hover:text-green-500"
           onClick={() => setDateState(false)}
         >
           X

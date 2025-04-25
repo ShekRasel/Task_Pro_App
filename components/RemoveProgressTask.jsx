@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import Date from "./DatePicker";
 import DatePicker from "./DatePicker";
 import TagPicker from "./TagPicker";
+import TodoPicker from "./TodoPicker";
 
 const RemoveProgressTask = ({ progress, taskId }) => {
   const {
@@ -25,6 +26,8 @@ const RemoveProgressTask = ({ progress, taskId }) => {
     setTagState,
     tagState,
     dateState,
+    todoState,
+    setTodoState
   } = useCustomProjectContext();
 
   const fileInputRef = useRef(null);
@@ -36,7 +39,7 @@ const RemoveProgressTask = ({ progress, taskId }) => {
     { icon: <Timer className="h-5 w-5" />, Name: "Date", id: 3 },
     { icon: <MdAttachment className="h-5 w-5" />, Name: "Attachment", id: 4 },
     { icon: <ListTodo className="h-5 w-5" />, Name: "Todo List", id: 5 },
-    { icon: <Trash className="h-5 w-5" />, Name: "Delete", id: 6 },
+    { icon: <Trash className="h-5 w-5 hover:text-red-400" />, Name: "Delete", id: 6 },
   ];
 
   const modifyPerProgressTask = (id, index) => {
@@ -49,6 +52,9 @@ const RemoveProgressTask = ({ progress, taskId }) => {
         break;
       case 4:
         addAttachment();
+        break;
+        case 5 : 
+        setTodoState(true);
         break;
       case 6:
         deletePerProgressTask();
@@ -112,8 +118,6 @@ const RemoveProgressTask = ({ progress, taskId }) => {
     }
   };
 
-console.log(totalTask[progress].addedTask[0].attachment);
-
   return (
     <div className="flex flex-col gap-6 relative">
       <input
@@ -128,15 +132,19 @@ console.log(totalTask[progress].addedTask[0].attachment);
       {tagState && <TagPicker progress={progress} taskId={taskId} />}
       {/* choose date */}
       {dateState && <DatePicker progress={progress} taskId={taskId} />}
+      {/* choose todo */}
+      {
+        todoState && <TodoPicker progress={progress} taskId={taskId}/>
+      }
 
       {ModificationButton.map((button, index) => (
-        <h1
+        <Button
           key={index}
-          className="flex gap-2 py-1 items-center px-2 rounded-sm bg-[#464C59] text-white text-sm cursor-pointer"
+          className="flex gap-2  items-center px-2 rounded-xs    cursor-pointer"
           onClick={() => modifyPerProgressTask(button.id, index)}
         >
           <span>{button.icon}</span> <span>{button.Name}</span>
-        </h1>
+        </Button>
       ))}
     </div>
   );
