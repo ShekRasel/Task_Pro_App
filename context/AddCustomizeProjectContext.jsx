@@ -26,6 +26,7 @@ const AddCustomizeProjectContext = ({ children }) => {
   const [saveTask, SetSaveTask] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [delMessageIndex, setDelMessageIndex] = useState(null);
+  const [delTodoIndex, setDelTodoIndex] = useState(null);
   const [delAttachmentIndex, setDelAttachmentIndex] = useState(null);
   const [messages, setMessages] = useState("");
   const [messageState, setMessageState] = useState(false);
@@ -38,6 +39,7 @@ const AddCustomizeProjectContext = ({ children }) => {
 
   const [dateState, setDateState] = useState(false);
   const [tagState, setTagState] = useState(false);
+  const [todoState,setTodoState] = useState(false);
 
   return (
     <CustomProjectContext.Provider
@@ -64,6 +66,8 @@ const AddCustomizeProjectContext = ({ children }) => {
         setTagState,
         delAttachmentIndex,
         setDelAttachmentIndex,
+        todoState,setTodoState,
+        delTodoIndex, setDelTodoIndex,
       }}
     >
       {children}
