@@ -3,8 +3,18 @@ import React from "react";
 import Members from "./Members";
 
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
+import Image from "next/image";
 
-const ShowTask = ({ task, taskId, progress, hidden, bg, flex,order1,order2 }) => {
+const ShowTask = ({
+  task,
+  taskId,
+  progress,
+  hidden,
+  bg,
+  flex,
+  order1,
+  order2,
+}) => {
   const { totalTask } = useCustomProjectContext();
 
   const commentsLength =
@@ -14,6 +24,10 @@ const ShowTask = ({ task, taskId, progress, hidden, bg, flex,order1,order2 }) =>
   const projectDate = totalTask[progress].addedTask.find(
     (task) => task.id === taskId
   )?.date;
+
+  const attachment = totalTask[progress].addedTask.find(
+    (task) => task.id === taskId
+  )?.attachment;
 
   return (
     <div
@@ -38,6 +52,17 @@ const ShowTask = ({ task, taskId, progress, hidden, bg, flex,order1,order2 }) =>
                 {singleTags.text}
               </h1>
             ))}
+        </div>
+        <div className={`${hidden} mt-4`}>
+          {attachment.length > 0 && (
+            <Image
+              src={attachment[0].src}
+              height={100}
+              width={100}
+              alt="attachment photo"
+              className="w-full rounded-md"
+            />
+          )}
         </div>
         <div className={`flex gap-6 items-center mt-2 ${order2} ${flex}`}>
           <Members />

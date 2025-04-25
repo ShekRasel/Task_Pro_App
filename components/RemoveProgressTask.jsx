@@ -1,6 +1,6 @@
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import { ListTodo, Tag, Timer, Trash } from "lucide-react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { MdAttachment, MdOutlinePerson } from "react-icons/md";
 import { Button } from "./ui/button";
 import Date from "./DatePicker";
@@ -24,9 +24,11 @@ const RemoveProgressTask = ({ progress, taskId }) => {
     setDateState,
     setTagState,
     tagState,
-    dateState
-
+    dateState,
   } = useCustomProjectContext();
+
+  const fileInputRef = useRef(null);
+
 
   const ModificationButton = [
     { icon: <MdOutlinePerson className="h-5 w-5" />, Name: "Members", id: 1 },
@@ -45,8 +47,12 @@ const RemoveProgressTask = ({ progress, taskId }) => {
       case 3:
         setDateState(true);
         break;
+      case 4:
+        addAttachment();
+        break;
       case 6:
         deletePerProgressTask();
+        break;
     }
   };
 
@@ -65,13 +71,63 @@ const RemoveProgressTask = ({ progress, taskId }) => {
       },
     }));
   };
+
+  const addAttachment = () => {
+
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setTotalTask((prev) => {
+          const image = {
+            id : crypto.randomUUID(),
+            src : reader.result,
+            name : file.name,
+          }
+          const updatedTasks = prev[progress].addedTask.map((task) => {
+            if (task.id === taskId) {
+              return {
+                ...task,
+                attachment: [...task.attachment,image],
+              };
+            }
+            return task;
+          });
+    
+          return {
+            ...prev,
+            [progress]: {
+              addedTask: updatedTasks,
+            },
+          };
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+console.log(totalTask[progress].addedTask[0].attachment);
+
   return (
     <div className="flex flex-col gap-6 relative">
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleChange}
+      />
 
       {/* choose tags */}
-      {tagState && <TagPicker progress={progress} taskId={taskId}/>}
+      {tagState && <TagPicker progress={progress} taskId={taskId} />}
       {/* choose date */}
-      {dateState && <DatePicker  progress={progress} taskId={taskId}/>}
+      {dateState && <DatePicker progress={progress} taskId={taskId} />}
 
       {ModificationButton.map((button, index) => (
         <h1
