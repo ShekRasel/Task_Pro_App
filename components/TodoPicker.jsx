@@ -1,8 +1,10 @@
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
+import { useTheme } from 'next-themes';
 
 const TodoPicker = ({ progress, taskId }) => {
+  const { theme } = useTheme();
   const {totalTask, setTotalTask, setTodoState } = useCustomProjectContext();
     const [input, setInput] = useState("");
 
@@ -41,7 +43,9 @@ const TodoPicker = ({ progress, taskId }) => {
 
        
   return (
-    <div className=" absolute min-w-64 md:right-0 -bottom-28 shadow-2xl  max-w-96 bg-[#5d616c] text-white text-sm rounded-sm">
+    <div className={` absolute min-w-64 md:right-0 -bottom-28 shadow-2xl  max-w-96  text-sm rounded-sm ${
+        theme === "dark" ? "bg-[#4b515e]" : "bg-white border "
+      }`}>
       <div className="py-2 border-b px-4 flex justify-between">
         <h1 className="">Todo</h1>
         <h1 onClick={() => setTodoState(false)} className="cursor-pointer hover:text-red-400">

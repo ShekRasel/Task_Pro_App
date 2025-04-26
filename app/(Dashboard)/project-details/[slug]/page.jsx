@@ -4,19 +4,18 @@ import AddCustomizeProjectContext from "@/context/AddCustomizeProjectContext";
 import React from "react";
 
 const page = async ({ params }) => {
+  console.log( await params)
   const { slug } = await params;
-  const page = decodeURIComponent(slug);
+  const projectName = decodeURIComponent(slug);
   return (
-        
     <div className="w-full">
-      <h1 className="text-lg font-semibold">{page}</h1>
+      <h1 className="text-lg font-semibold">{projectName}</h1>
       <div className="mt-4">
-      <AddCustomizeProjectContext>
-          <TaskProgress />
-      </AddCustomizeProjectContext>
+        <AddCustomizeProjectContext>
+          <TaskProgress projectName={projectName}/>
+        </AddCustomizeProjectContext>
       </div>
     </div>
-        
   );
 };
 

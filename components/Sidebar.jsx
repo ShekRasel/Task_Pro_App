@@ -1,5 +1,4 @@
 'use client'
-import { File, Home, MessageSquareCode, Settings } from "lucide-react";
 import { RiSettings3Fill } from "react-icons/ri";
 import { BiSolidMessage } from "react-icons/bi";
 import { HiMiniHome } from "react-icons/hi2";
@@ -14,10 +13,10 @@ const Sidebar = () => {
   const { theme } = useTheme();
 
   const pages = [
-    { link: "/", name: "Dashboard", icon: <HiMiniHome /> },
-    { link: "/project", name: "Projects", icon: <PiFilesFill /> },
-    { link: "/message", name: "Messages", icon: <BiSolidMessage /> },
-    { link: "/settings", name: "Settings", icon:<RiSettings3Fill />},
+    { link: "/", name: "Dashboard", icon: <HiMiniHome className="w-5 h-5"/> },
+    { link: "/project", name: "Projects", icon: <PiFilesFill className="w-5 h-5"/> },
+    { link: "/message", name: "Messages", icon: <BiSolidMessage className="w-5 h-5"/> },
+    { link: "/settings", name: "Settings", icon:<RiSettings3Fill className="w-5 h-5"/>},
   ];
   return <div className={` md:py-9 px-2 md:p-6 ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white'}`}>
     <div className="flex gap-2 py-5 md:py-0 items-center justify-center lg:justify-start">

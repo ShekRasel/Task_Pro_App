@@ -7,7 +7,7 @@ import DeleteProgressTask from "./DeleteProgressTask";
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import { useTheme } from 'next-themes';
 import { toast } from "sonner"
-const TaskProgress = () => {
+const TaskProgress = ({projectName}) => {
   const {
     taskTimeLine,
     setTaskTimeLine,
@@ -85,7 +85,7 @@ const TaskProgress = () => {
           {/* after clicking add task show the input  */}
 
           <div className="w-full ">
-          <TaskAddInput index={index} progress={singleTask.progress} />
+          <TaskAddInput index={index} progress={singleTask.progress} projectName={projectName}/>
           </div>
 
           {/* click to add task */}

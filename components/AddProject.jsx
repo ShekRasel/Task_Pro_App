@@ -31,46 +31,43 @@ const AddProject = () => {
   } = useAddProjectContext();
   const [input, setInput] = useState("");
   const [date, setDate] = useState(null);
-  const [member, setMember] = useState("");
+  const [members, setMembers] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [memberName, setMemberName] = useState("");
+const [memberPhoto, setMemberPhoto] = useState(null);
+
 
   const { theme } = useTheme();
 
   useEffect(() => {
     input && setProjectName(input);
     date && setProjectDate(date);
-    member && setProjectMember(member);
-  }, [date, member, input]);
+    members && setProjectMember(members);
+  }, [date, members, input]);
 
   //  useEffect(()=>{
   //   setOpenDialog(true);
   //  },[openDialog])
 
   const addProject = () => {
-    if (input && date && member) {
+    if (input && date && members) {
       const newProjectData = {
-        id: projects.length + totalProject.length + 1,
+        id: Date.now(),
         date: projectDate,
         logo: projectLogo,
         projectName: projectName,
-        members: [
-          {
-            photo: "/images/person6.jpg",
-            name: projectMember,
-          },
-        ],
+        members: members,
       };
 
       setTotalProject((prev) => [...prev, newProjectData]);
       setDate("");
       setInput("");
-      setMember("");
       setOpenDialog(false);
-      toast.success('Project Added successfully!', {
-                    style : {
-                      color: 'green'
-                    }
-                  });
+      toast.success("Project Added successfully!", {
+        style: {
+          color: "green",
+        },
+      });
     } else {
       toast.warning("field can not be empty....", {
         style: {
@@ -80,6 +77,24 @@ const AddProject = () => {
       });
     }
   };
+
+  const handleAddMember = () => {
+    if (memberName && memberPhoto) {
+      const newMember = {
+        name: memberName,
+        photo: URL.createObjectURL(memberPhoto),
+      };
+      setMembers((prevMembers) => [...prevMembers, newMember]);
+      setMemberName(""); // clear input after adding
+      setMemberPhoto(null); // clear photo input
+    } else {
+      toast.warning("Member name and photo both are required!", {
+        style: { color: "red", fontWeight: "bold" },
+      });
+    }
+  };
+
+
   return (
     <Dialog className="" open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger
@@ -110,13 +125,45 @@ const AddProject = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Members"
-            className="px-1.5 py-1.5 w-full mt-8 border outline-none rounded-xs"
-            value={member}
-            onChange={(e) => setMember(e.target.value)}
-          />
+
+          <div className=" mt-8">
+            <div className=" flex justify-between gap-2">
+              <input
+                type="text"
+                placeholder="Members"
+                className="px-1.5 py-1.5 w-full border outline-none rounded-xs"
+                value={memberName}
+                onChange={(e) => setMemberName(e.target.value)}
+              />
+
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setMemberPhoto(e.target.files[0])}
+                className="px-1.5 py-1.5 w-full  border outline-none rounded-xs"
+                placeholder=""
+              />
+
+              {/* Add Member Button */}
+              <Button className="px-3 rounded-xs text-xs py-0" onClick={handleAddMember}>
+                Add
+              </Button>
+            </div>
+            {/* Show Added Members List */}
+            <div className=" flex gap-3">
+              {members.map((member, index) => (
+                <div key={index} className="flex items-center gap-2 mt-2 bg-[#3D434C] px-0.5">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span>{member.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <input
             type="date"
             name=""

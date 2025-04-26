@@ -2,8 +2,9 @@ import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-
+import { useTheme } from "next-themes";
 const TagPicker = ({ progress, taskId }) => {
+  const { theme } = useTheme();
   const { setTagState, totalTask, setTotalTask } = useCustomProjectContext();
   const [input, setInput] = useState("");
   const [color, setColor] = useState("green");
@@ -66,7 +67,11 @@ const TagPicker = ({ progress, taskId }) => {
     });
   };
   return (
-    <div className=" absolute min-w-72 md:right-0 top-22 shadow-2xl  max-w-96 bg-[#5d616c] text-white text-sm rounded-sm">
+    <div
+      className={`" absolute min-w-72 md:right-0 top-22 shadow-2xl  max-w-96 ${
+        theme === "dark" ? "bg-[#4b515e]" : "bg-white border"
+      } text-sm rounded-sm"`}
+    >
       <div className="py-2 border-b px-3 flex justify-between">
         <h1 className="">Tags</h1>
         <h1
@@ -85,7 +90,7 @@ const TagPicker = ({ progress, taskId }) => {
           onChange={(e) => setInput(e.target.value)}
         />
         <select
-          className="border bg-gray-500 px-4"
+          className="border text-blue-400 px-4"
           onChange={(e) => setColor(e.target.value)}
         >
           <option value="#D1FAE5">green</option>
@@ -108,7 +113,7 @@ const TagPicker = ({ progress, taskId }) => {
                 className={`border px-2`}
                 style={{
                   backgroundColor: singleTags.color,
-                   color: "#111",
+                  color: "#111",
                   borderColor: singleTags.color,
                 }}
               >

@@ -1,7 +1,7 @@
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import AddModifySingleTaskProgress from "./AddModifySingleTaskProgress";
 
-const TaskAddInput = ({index,progress}) => {
+const TaskAddInput = ({index,progress,projectName}) => {
   const {showInput,saveTask,inputValue,setInputValue,totalTask} = useCustomProjectContext ();
   return (
     <div className="mt-4 w-full">
@@ -9,7 +9,7 @@ const TaskAddInput = ({index,progress}) => {
         <div className="flex flex-col gap-3.5 w-full">
           {totalTask[progress].addedTask.map((tasks, index) => (
             
-           <AddModifySingleTaskProgress key={index} task={tasks.task} progress={progress} taskId={tasks.id}/>
+           <AddModifySingleTaskProgress key={index} task={tasks.task} progress={progress} taskId={tasks.id} projectName={projectName}/>
           ))}
         </div>
       )}

@@ -10,6 +10,7 @@ const AddProjectContext = ({ children }) => {
   const [projectLogo, setProjectLogo] = useState(null);
   const [projectMember, setProjectMember] = useState("");
   const [projectMemberPhoto, setProjectMemberPhoto] = useState(null);
+  const [updatedProjects, setUpdatedProjects] = useState([]);
   return (
     <projectContext.Provider
       value={{
@@ -25,6 +26,7 @@ const AddProjectContext = ({ children }) => {
         setProjectMember,
         projectMemberPhoto,
         setProjectMemberPhoto,
+        updatedProjects, setUpdatedProjects
       }}
     >
       {children}
