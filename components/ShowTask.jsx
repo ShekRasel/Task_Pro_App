@@ -1,11 +1,8 @@
 import { MessageSquare } from "lucide-react";
 import React from "react";
-import Members from "./Members";
-
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import Image from "next/image";
-
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 const ShowTask = ({
   task,
@@ -16,47 +13,49 @@ const ShowTask = ({
   flex,
   order1,
   order2,
+  heightWidth,
 }) => {
   const { totalTask } = useCustomProjectContext();
   const { theme } = useTheme();
 
-  const commentsLength =
-    totalTask[progress].addedTask.find((task) => task.id === taskId)?.comments
-      .length || 0;
-
-  const projectDate = totalTask[progress].addedTask.find(
+  const taskData = totalTask[progress].addedTask.find(
     (task) => task.id === taskId
-  )?.date;
+  );
 
-  const attachment = totalTask[progress].addedTask.find(
-    (task) => task.id === taskId
-  )?.attachment;
+  const commentsLength = taskData?.comments.length || 0;
+  const projectDate = taskData?.date;
+  const attachment = taskData?.attachment || [];
+  const members = taskData?.member || [];
 
   return (
     <div
-      className={`py-1.5  rounded-md cursor-pointer   w-full  ${bg}  ${theme === 'dark' ? 'bg-[#464C59]' : 'bg-white '}`}
+      className={`py-1.5 rounded-md cursor-pointer w-full ${bg} ${
+        theme === "dark" ? "bg-[#464C59]" : "bg-white"
+      }`}
     >
       <h1 className={`text-start font-semibold w-full ${hidden} block`}>
         {task}
       </h1>
-      <div className="flex flex-col ">
-        <div className={`flex py-3 text-sm  gap-2 ${order1}`}>
-          {totalTask[progress].addedTask
-            .find((task) => task.id === taskId)
-            ?.tags.map((singleTags, index) => (
-              <h1
-                key={index}
-                className={`border px-2`}
-                style={{
-                  backgroundColor: singleTags.color,
-                  color: "#111",
-                 borderColor: singleTags.color,
-                }}
-              >
-                {singleTags.text}
-              </h1>
-            ))}
+
+      <div className="flex flex-col">
+        {/* show tags */}
+        <div className={`flex py-3 text-sm gap-2 ${order1}`}>
+          {taskData?.tags.map((singleTag, index) => (
+            <h1
+              key={index}
+              className="border px-2"
+              style={{
+                backgroundColor: singleTag.color,
+                color: "#111",
+                borderColor: singleTag.color,
+              }}
+            >
+              {singleTag.text}
+            </h1>
+          ))}
         </div>
+
+        {/* show attachment */}
         <div className={`${hidden} mt-4`}>
           {attachment.length > 0 && (
             <Image
@@ -68,14 +67,37 @@ const ShowTask = ({
             />
           )}
         </div>
+
+        {/* bottom part */}
         <div className={`flex gap-6 items-center mt-2 ${order2} ${flex}`}>
-          <Members />
+          {/* show added members photos */}
+          <div className="flex -space-x-2">
+            {members.slice(0, 3).map((member, index) => (
+              <Image
+                key={index}
+                src={member.photo}
+                height={32}
+                width={32}
+                alt={member.name}
+                className={`rounded-full object-cover ${heightWidth} border-2`}
+              />
+            ))}
+
+            {members.length > 3 && (
+              <div
+                className={`h-8 w-8 flex items-center justify-center rounded-full bg-gray-300 text-black text-xs font-bold border-2`}
+              >
+                +{members.length - 3}
+              </div>
+            )}
+          </div>
+
+          {/* date + comments */}
           <div className="flex gap-3 items-center">
             {projectDate && (
               <h1 className="text-sm font-semibold">{projectDate}</h1>
             )}
-
-            <div className="flex gap-0.5 ">
+            <div className="flex gap-0.5">
               <MessageSquare className="w-4" />
               <h1 className="font-semibold text-sm">{commentsLength}</h1>
             </div>

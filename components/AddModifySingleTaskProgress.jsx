@@ -20,7 +20,7 @@ import AttachmentAdd from "./AttachmentAdd";
 import TodoAdder from "./TodoAdder";
 import { useTheme } from 'next-themes';
 
-const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
+const AddModifySingleTaskProgress = ({ task, progress, taskId ,projectName}) => {
   const { theme } = useTheme();
  
   
@@ -38,6 +38,8 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
           flex={"justify-between"}
           order1={"order-1"}
           order2={"order-2"}
+          projectName={projectName}
+          heightWidth ={'w-6 h-6'}
         />
       </DialogTrigger>
       <DialogContent className={`md:min-w-3xl h-9/10 md:h-1/2 overflow-y-scroll lg:min-w-4xl md:max-w-4xl  sm:max-w-[500px] ${theme === 'dark' ? 'bg-[#464C59]' : 'bg-white border'}`}>
@@ -55,6 +57,7 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
               flex={""}
               order1={"order-2"}
               order2={"order-1"}
+              heightWidth ={'w-10 h-10'}
             />
             {/* description added area */}
             <div className="w-full mt-2">
@@ -75,7 +78,7 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId }) => {
 
           {/* modification buttons */}
           <div className="md:w-1/6">
-            <RemoveProgressTask progress={progress} taskId={taskId} />
+            <RemoveProgressTask progress={progress} taskId={taskId} projectName={projectName}/>
           </div>
         </div>
       </DialogContent>

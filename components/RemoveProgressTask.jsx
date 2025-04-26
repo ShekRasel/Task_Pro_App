@@ -7,27 +7,19 @@ import Date from "./DatePicker";
 import DatePicker from "./DatePicker";
 import TagPicker from "./TagPicker";
 import TodoPicker from "./TodoPicker";
+import ChooseMember from "./ChooseMember";
 
-const RemoveProgressTask = ({ progress, taskId }) => {
+const RemoveProgressTask = ({ progress, taskId ,projectName}) => {
   const {
-    taskTimeLine,
-    setTaskTimeLine,
-    showInput,
-    setShowInput,
-    saveTask,
-    SetSaveTask,
-    inputValue,
-    setInputValue,
     totalTask,
     setTotalTask,
-    allTaskTimeLine,
-    setProjectDate,
     setDateState,
     setTagState,
     tagState,
     dateState,
     todoState,
-    setTodoState
+    setTodoState,
+    memberState,setMemberState
   } = useCustomProjectContext();
 
   const fileInputRef = useRef(null);
@@ -44,6 +36,9 @@ const RemoveProgressTask = ({ progress, taskId }) => {
 
   const modifyPerProgressTask = (id, index) => {
     switch (id) {
+      case 1:
+        setMemberState(true);
+        break
       case 2:
         setTagState(true);
         break;
@@ -128,6 +123,8 @@ const RemoveProgressTask = ({ progress, taskId }) => {
         onChange={handleChange}
       />
 
+      {/* member choose */}
+      {memberState && <ChooseMember progress={progress} taskId={taskId} projectName={projectName}/>}
       {/* choose tags */}
       {tagState && <TagPicker progress={progress} taskId={taskId} />}
       {/* choose date */}

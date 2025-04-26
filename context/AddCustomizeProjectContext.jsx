@@ -40,6 +40,7 @@ const AddCustomizeProjectContext = ({ children }) => {
   const [dateState, setDateState] = useState(false);
   const [tagState, setTagState] = useState(false);
   const [todoState,setTodoState] = useState(false);
+  const [memberState,setMemberState] = useState(false);
 
   return (
     <CustomProjectContext.Provider
@@ -68,6 +69,7 @@ const AddCustomizeProjectContext = ({ children }) => {
         setDelAttachmentIndex,
         todoState,setTodoState,
         delTodoIndex, setDelTodoIndex,
+        memberState,setMemberState
       }}
     >
       {children}
