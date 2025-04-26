@@ -6,12 +6,19 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { toast } from "sonner"
+
 const DeleteProject = ({ projectId, updatedProjects, setUpdatedProjects }) => {
   const deleteSingleProject = () => {
     const afterDeleteProjects = updatedProjects.filter((deleteProject) => {
       return deleteProject.id !== projectId;
     });
     setUpdatedProjects(afterDeleteProjects);
+    toast.success('Project Delete successfully!', {
+      style : {
+        color: 'green'
+      }
+    });
   };
   return (
     <DropdownMenu>

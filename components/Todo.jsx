@@ -4,7 +4,12 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 
+
+
+import { useTheme } from 'next-themes';
+
 const Todo = () => {
+  const { theme } = useTheme();
   const [todos, setTodos] = useState([
     "Write Unit Tests",
     "Organize Your Codebase",
@@ -38,7 +43,7 @@ const Todo = () => {
   };
 
   return (
-    <div className="w-full md:w-1/2 py-4 pl-4 border rounded-md">
+    <div className={`w-full md:w-1/2 py-4 pl-4  rounded-md ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white border'}`}>
       <h1
         onClick={() => setIsAdding(true)}
         className="flex gap-2 border-b pb-2 cursor-pointer"

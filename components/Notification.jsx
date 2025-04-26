@@ -11,7 +11,10 @@ import {
 import { Bell } from "lucide-react";
 import { motion } from "motion/react"
 
+import { useTheme } from 'next-themes';
 const Notification = () => {
+  const { theme } = useTheme();
+
   return (
     <DropdownMenu className="border-none">
       <DropdownMenuTrigger className='border-none outline-none focus:outline-none focus:ring-0'>
@@ -24,7 +27,7 @@ const Notification = () => {
          initial={{scale:0,opacity:0}}
          animate={{scale:1,opacity:1}}
          transition={{duration:0.6, ease:"easeInOut"}}
-        className=" border shadow-md w-56 py-2 rounded-md px-4 bg-white text-black">
+        className={` shadow-md w-56 py-2 rounded-md px-4   ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white border'}`}>
         <DropdownMenuLabel>Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator />
 

@@ -6,6 +6,7 @@ import TaskAddInput from "./TaskAddInput";
 import DeleteProgressTask from "./DeleteProgressTask";
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
 import { useTheme } from 'next-themes';
+import { toast } from "sonner"
 const TaskProgress = () => {
   const {
     taskTimeLine,
@@ -21,25 +22,41 @@ const TaskProgress = () => {
   const { theme } = useTheme();
 
   const addTaskPerProgress = (progress) => {
-    const newTask = {
-      id: Date.now(),
-      task: inputValue,
-      comments: [],
-      descriptions: [],
-      date : '',
-      attachment :[],
-      tags : [],
-      todo : [],
-      member: []
-    };
-    setTotalTask((prev) => ({
-      ...prev,
-      [progress]: {
-        addedTask: [...prev[progress].addedTask, newTask],
-      },
-    }));
-    setInputValue("");
-    SetSaveTask(true);
+    if(inputValue){
+
+      const newTask = {
+        id: Date.now(),
+        task: inputValue,
+        comments: [],
+        descriptions: [],
+        date : '',
+        attachment :[],
+        tags : [],
+        todo : [],
+        member: []
+      };
+      setTotalTask((prev) => ({
+        ...prev,
+        [progress]: {
+          addedTask: [...prev[progress].addedTask, newTask],
+        },
+      }));
+      setInputValue("");
+      SetSaveTask(true);
+      setShowInput(null);
+      toast.success('Task Added successfully!', {
+              style : {
+                color: 'green'
+              }
+            });
+    }else{
+      toast.warning('field can not be empty....',{
+        style: {
+          color: "red",
+          fontWeight: "bold",
+        },
+      })
+    }
   };
 
   useEffect(() => {
@@ -76,9 +93,9 @@ const TaskProgress = () => {
           {showInput === index ? (
             <div className="w-full flex gap-4 mt-4 items-center">
               <Button
-                className=" rounded-xs cursor-pointer"
+                className=" rounded-xs cursor-pointer px-2 py-0"
                 onClick={() => {
-                  setShowInput(null);
+                 
                   addTaskPerProgress(singleTask.progress);
                 }}
               >

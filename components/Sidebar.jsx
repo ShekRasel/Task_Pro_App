@@ -1,19 +1,23 @@
 'use client'
 import { File, Home, MessageSquareCode, Settings } from "lucide-react";
+import { RiSettings3Fill } from "react-icons/ri";
+import { BiSolidMessage } from "react-icons/bi";
+import { HiMiniHome } from "react-icons/hi2";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { useTheme } from 'next-themes';
+import { PiFilesFill } from "react-icons/pi";
 const Sidebar = () => {
   const pathName = usePathname();
   const { theme } = useTheme();
 
   const pages = [
-    { link: "/", name: "Dashboard", icon: <Home /> },
-    { link: "/project", name: "Projects", icon: <File /> },
-    { link: "/message", name: "Messages", icon: <MessageSquareCode/> },
-    { link: "/settings", name: "Settings", icon: <Settings /> },
+    { link: "/", name: "Dashboard", icon: <HiMiniHome /> },
+    { link: "/project", name: "Projects", icon: <PiFilesFill /> },
+    { link: "/message", name: "Messages", icon: <BiSolidMessage /> },
+    { link: "/settings", name: "Settings", icon:<RiSettings3Fill />},
   ];
   return <div className={` md:py-9 px-2 md:p-6 ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white'}`}>
     <div className="flex gap-2 py-5 md:py-0 items-center justify-center lg:justify-start">
@@ -23,7 +27,7 @@ const Sidebar = () => {
     <div className="mt-15 flex flex-col gap-10">
       {pages.map((page,index)=>(
         <div key={index} className="text">
-          <Link href={page.link} className="flex gap-2 justify-center lg:justify-start font-semibold">
+          <Link href={page.link} className="flex gap-2 justify-center items-center lg:justify-start font-semibold">
           <span className={`${pathName === page.link && 'text-blue-500'}`}>{page.icon}</span>
           <h1 className={`hidden lg:block ${pathName === page.link && 'text-blue-500'}`}>{page.name}</h1>
           </Link>

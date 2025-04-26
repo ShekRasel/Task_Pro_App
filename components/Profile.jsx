@@ -15,6 +15,7 @@ import { Switch } from "./ui/switch";
 import { useTheme } from "next-themes";
 
 const Profile = () => {
+
   const {setTheme,theme} = useTheme();
   return (
     <DropdownMenu className="border-none">
@@ -28,13 +29,13 @@ const Profile = () => {
           className="rounded-full h-10 w-10  cursor-pointer"
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className=" rounded-none  shadow-none pr-4 md:pr-10 xl:pr-24 border-none bg-transparent">
+      <DropdownMenuContent className={` rounded-none  shadow-none pr-4 md:pr-10 xl:pr-24 border-none bg-transparent `}>
         <motion.div
         initial={{scale:0,opacity:0}}
         animate={{scale:1,opacity:1}}
         transition={{duration:0.6, ease:"easeInOut"}}
         
-        className=" shadow-md w-56 py-2 rounded-md px-4 border bg-white text-black">
+        className= {`shadow-md w-56 py-2 rounded-md px-4    ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white border'}`}>
           <div className="flex flex-col items-center">
             <DropdownMenuLabel>
               {" "}

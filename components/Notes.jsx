@@ -5,7 +5,11 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { motion } from "motion/react";
 
+
+import { useTheme } from 'next-themes';
+
 const Notes = () => {
+  const { theme } = useTheme();
   const [note, setNote] = useState(false);
   const [addNote, setAddNote] = useState([
    
@@ -21,7 +25,7 @@ const Notes = () => {
   };
 
   return (
-    <div className="w-full md:w-1/2 py-4 pl-4  border rounded-md ">
+    <div className={`w-full md:w-1/2 py-4 pl-4   rounded-md ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white border'}`}>
       <h1
         onClick={() => setNote(true)}
         className="flex gap-2 border-b pb-2 cursor-pointer"
@@ -35,7 +39,7 @@ const Notes = () => {
           <div className="flex justify-between pr-4 gap-2">
             <input
               type="text"
-              className="border rounded-md px-2 w-full"
+              className="border rounded-xs px-2 w-full"
               value={noteValue}
               onChange={(e) => setNoteValue(e.target.value)}
               placeholder="Add Notes ...."
@@ -47,7 +51,7 @@ const Notes = () => {
                   setNoteValue("");
                 }
               }}
-              className="rounded-sm cursor-pointer"
+              className="rounded-xs cursor-pointer"
             >
               Add
             </Button>

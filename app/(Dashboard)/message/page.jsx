@@ -1,6 +1,7 @@
 "use client";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { AlignRightIcon, Link, PlusCircle } from "lucide-react";
+import { useTheme } from 'next-themes';
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { FiSend } from "react-icons/fi";
 const massage = () => {
@@ -8,6 +9,8 @@ const massage = () => {
   const [text, setText] = useState("");
   const messageEndRef = useRef(null);
   const [time, setTime] = useState(null);
+  const { theme } = useTheme();
+
 
   const scrollToBottom = () => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -46,8 +49,8 @@ const massage = () => {
   };
 
   return (
-    <div className="w-full md:border  pb-5 md:pb-0 md:h-2/3 mt-2 flex flex-col md:flex-row gap-4 md:gap-0  ">
-      <div className="border md:w-2/6  ">
+    <div className={`w-full rounded-md  pb-5 md:pb-0 md:h-2/3 mt-2 flex flex-col md:flex-row gap-4 md:gap-0  ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white '}`}>
+      <div className=" md:border-r md:w-2/6  ">
         <div className="flex justify-between px-3 py-5 border-b items-center">
           <h1 className="text-lg">Message</h1>
           <PlusCircle />
@@ -93,10 +96,10 @@ const massage = () => {
         </div>
       </div>
 
-      <div className=" border md:border-none w-full md:w-4/6 h-full  flex flex-col justify-between pb-2 gap-8 ">
+      <div className="  w-full md:w-4/6 h-full  flex flex-col justify-between  border-t md:border-none gap-8 ">
 
         <div className=" w-full h-full ">
-          <div className="border flex px-3 py-5 items-center gap-4">
+          <div className="border-b flex px-3 py-5 items-center gap-4">
             <FaBarsStaggered className="md:hidden" />
             <h1 className="  text-lg font-semibold">conversation</h1>
           </div>
@@ -137,8 +140,8 @@ const massage = () => {
         </div>
 
         {/* Message input */}
-        <div className="px-2 md:px-6 ">
-          <div className="w-full rounded-full border py-1 flex px-3 pr-5">
+        <div className="px-2 md:px-6">
+          <div className="w-full rounded-full  border py-1 flex px-3 pr-5">
             <input
               type="text"
               className="w-full outline-none"

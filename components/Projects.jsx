@@ -23,7 +23,7 @@ useEffect(()=>{
     <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-4 `}>
       {updatedProjects.map((project) => (
         <Link key={project.id} href={`/project-details/${project.projectName}`}>
-          <div className={`w-full border p-4 rounded-md ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white'}`}>
+          <div className={`w-full  p-4 rounded-md ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white border'}`}>
             <div className="flex justify-between items-center">
               <span className="font-semibold">{project.date}</span>
               <span className="font-bold">
