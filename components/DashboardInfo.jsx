@@ -1,12 +1,11 @@
-'use client'
+"use client";
 import { progress } from "motion";
 import React from "react";
 
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 const DashboardInfo = () => {
-  
-
-const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   const infos = [
     { task: "Total Projects", total: "35", progress: "67" },
@@ -16,8 +15,13 @@ const { theme } = useTheme();
   ];
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 ">
-      {infos.map((info,index) => (
-        <div className={`flex justify-between rounded-md p-3  items-center ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white border'}`} key={index}>
+      {infos.map((info, index) => (
+        <div
+          className={`flex justify-between rounded-md p-3  items-center ${
+            currentTheme === "dark" ? "bg-[#373B43]" : "bg-white border"
+          }`}
+          key={index}
+        >
           <div>
             <h1 className="font-semibold">{info.task}</h1>
             <h2 className="text-lg font-bold lg:mt-2">{info.total}</h2>

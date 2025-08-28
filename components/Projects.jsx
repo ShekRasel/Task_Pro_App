@@ -7,8 +7,10 @@ import DeleteProject from "./DeleteProject";
 import { useAddProjectContext } from "@/context/AddProjectContext";
 import { useTheme } from "next-themes";
 const Projects = () => {
-  const { totalProject,updatedProjects,setUpdatedProjects } = useAddProjectContext();
-  const { theme } = useTheme();
+  const { totalProject, updatedProjects, setUpdatedProjects } =
+    useAddProjectContext();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   useEffect(() => {
     const updateTotalProject = [...projects, ...totalProject];
@@ -21,7 +23,7 @@ const Projects = () => {
         <Link key={project.id} href={`/project-details/${project.projectName}`}>
           <div
             className={`w-full  p-4 rounded-md ${
-              theme === "dark" ? "bg-[#373B43]" : "bg-white border"
+              currentTheme === "dark" ? "bg-[#373B43]" : "bg-white border"
             }`}
           >
             <div className="flex justify-between items-center">

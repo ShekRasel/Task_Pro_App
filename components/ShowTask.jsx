@@ -16,7 +16,8 @@ const ShowTask = ({
   heightWidth,
 }) => {
   const { totalTask } = useCustomProjectContext();
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   const taskData = totalTask[progress].addedTask.find(
     (task) => task.id === taskId
@@ -30,7 +31,7 @@ const ShowTask = ({
   return (
     <div
       className={`py-1.5 rounded-md cursor-pointer w-full ${bg} ${
-        theme === "dark" ? "bg-[#464C59]" : "bg-white"
+        currentTheme === "dark" ? "bg-[#464C59]" : "bg-white"
       }`}
     >
       <h1 className={`text-start font-semibold w-full ${hidden} block`}>

@@ -4,7 +4,8 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useTheme } from "next-themes";
 const TagPicker = ({ progress, taskId }) => {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
   const { setTagState, totalTask, setTotalTask } = useCustomProjectContext();
   const [input, setInput] = useState("");
   const [color, setColor] = useState("green");
@@ -69,7 +70,7 @@ const TagPicker = ({ progress, taskId }) => {
   return (
     <div
       className={`" absolute min-w-72 md:right-0 top-22 shadow-2xl  max-w-96 ${
-        theme === "dark" ? "bg-[#4b515e]" : "bg-white border"
+        currentTheme === "dark" ? "bg-[#4b515e]" : "bg-white border"
       } text-sm rounded-sm"`}
     >
       <div className="py-2 border-b px-3 flex justify-between">

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Dialog,
   DialogContent,
@@ -18,15 +18,19 @@ import Image from "next/image";
 import { MdAttachment } from "react-icons/md";
 import AttachmentAdd from "./AttachmentAdd";
 import TodoAdder from "./TodoAdder";
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
-const AddModifySingleTaskProgress = ({ task, progress, taskId ,projectName}) => {
-  const { theme } = useTheme();
- 
-  
+const AddModifySingleTaskProgress = ({
+  task,
+  progress,
+  taskId,
+  projectName,
+}) => {
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
-    <Dialog >
+    <Dialog>
       <DialogTrigger>
         {/* task will be show */}
         <ShowTask
@@ -39,14 +43,20 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId ,projectName}) => 
           order1={"order-1"}
           order2={"order-2"}
           projectName={projectName}
-          heightWidth ={'w-6 h-6'}
+          heightWidth={"w-6 h-6"}
         />
       </DialogTrigger>
-      <DialogContent className={`md:min-w-3xl h-9/10 md:h-1/2 overflow-y-scroll lg:min-w-4xl md:max-w-4xl  sm:max-w-[500px] ${theme === 'dark' ? 'bg-[#464C59]' : 'bg-white border'}`}>
+      <DialogContent
+        className={`md:min-w-3xl h-9/10 md:h-1/2 overflow-y-scroll lg:min-w-4xl md:max-w-4xl  sm:max-w-[500px] ${
+          currentTheme === "dark" ? "bg-[#464C59]" : "bg-white border"
+        }`}
+      >
         <DialogHeader>
           <DialogTitle className="text-start">{task}</DialogTitle>
         </DialogHeader>
-        <div className={`flex flex-col md:flex-row justify-between gap-4 lg:gap-8 `}>
+        <div
+          className={`flex flex-col md:flex-row justify-between gap-4 lg:gap-8 `}
+        >
           <div className=" md:w-5/6">
             <ShowTask
               task={task}
@@ -57,7 +67,7 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId ,projectName}) => 
               flex={""}
               order1={"order-2"}
               order2={"order-1"}
-              heightWidth ={'w-10 h-10'}
+              heightWidth={"w-10 h-10"}
             />
             {/* description added area */}
             <div className="w-full mt-2">
@@ -66,11 +76,11 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId ,projectName}) => 
 
             {/* todo adder */}
 
-            <TodoAdder progress={progress} taskId={taskId}/>
+            <TodoAdder progress={progress} taskId={taskId} />
 
             {/* attachment area */}
 
-            <AttachmentAdd progress={progress} taskId={taskId}/>
+            <AttachmentAdd progress={progress} taskId={taskId} />
 
             {/* comments area */}
             <TaskComments progress={progress} taskId={taskId} />
@@ -78,7 +88,11 @@ const AddModifySingleTaskProgress = ({ task, progress, taskId ,projectName}) => 
 
           {/* modification buttons */}
           <div className="md:w-1/6">
-            <RemoveProgressTask progress={progress} taskId={taskId} projectName={projectName}/>
+            <RemoveProgressTask
+              progress={progress}
+              taskId={taskId}
+              projectName={projectName}
+            />
           </div>
         </div>
       </DialogContent>

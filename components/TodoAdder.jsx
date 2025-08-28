@@ -10,7 +10,10 @@ const TodoAdder = ({ task, progress, taskId }) => {
 
   const [showInput, setShowInput] = useState(null);
   const [input, setInput] = useState("");
-  const [subTextIndex, setSubTextIndex] = useState({ todoIndex: null, subIndex: null });
+  const [subTextIndex, setSubTextIndex] = useState({
+    todoIndex: null,
+    subIndex: null,
+  });
 
   const todo = totalTask[progress].addedTask.find(
     (task) => task.id === taskId
@@ -96,7 +99,7 @@ const TodoAdder = ({ task, progress, taskId }) => {
             }
             return subtask;
           });
-  
+
           return {
             ...task,
             todo: updatedTodos,
@@ -104,7 +107,7 @@ const TodoAdder = ({ task, progress, taskId }) => {
         }
         return task;
       });
-  
+
       return {
         ...prev,
         [progress]: {
@@ -113,9 +116,6 @@ const TodoAdder = ({ task, progress, taskId }) => {
       };
     });
   };
-  
-
-  console.log(totalTask[progress].addedTask[0].todo);
 
   return (
     <div className="mt-12">
@@ -146,18 +146,28 @@ const TodoAdder = ({ task, progress, taskId }) => {
                       <div
                         className="flex justify-between hover:border items-center py-1 rounded-sm px-2"
                         key={subIndex}
-                        onMouseEnter={() => setSubTextIndex({ todoIndex: index, subIndex })}
-                        onMouseLeave={() => setSubTextIndex({ todoIndex: null, subIndex: null })}
+                        onMouseEnter={() =>
+                          setSubTextIndex({ todoIndex: index, subIndex })
+                        }
+                        onMouseLeave={() =>
+                          setSubTextIndex({ todoIndex: null, subIndex: null })
+                        }
                       >
                         <div className="flex gap-2.5">
                           <input type="checkbox" name="" id="" />
                           <h1 className="">{text}</h1>
                         </div>
-                          {subTextIndex.todoIndex === index && subTextIndex.subIndex === subIndex && (
-                          <div>
-                            <Trash2  onClick={()=>deleteSubTodoText(index,subIndex)} className="w-5 text-red-400"/>
-                          </div>
-                        )}
+                        {subTextIndex.todoIndex === index &&
+                          subTextIndex.subIndex === subIndex && (
+                            <div>
+                              <Trash2
+                                onClick={() =>
+                                  deleteSubTodoText(index, subIndex)
+                                }
+                                className="w-5 text-red-400"
+                              />
+                            </div>
+                          )}
                       </div>
                     ))}
                   </div>
@@ -173,7 +183,12 @@ const TodoAdder = ({ task, progress, taskId }) => {
                       onChange={(e) => setInput(e.target.value)}
                     />
                     <div className="flex items-center gap-2 mt-2">
-                      <Button onClick={() => addSubTodo(index)} className='rounded-xs py-0 cursor-pointer text-sm'>Add</Button>
+                      <Button
+                        onClick={() => addSubTodo(index)}
+                        className="rounded-xs py-0 cursor-pointer text-sm"
+                      >
+                        Add
+                      </Button>
                       <h1
                         onClick={() => setShowInput(null)}
                         className="cursor-pointer font-semibold text-sm"
@@ -183,7 +198,10 @@ const TodoAdder = ({ task, progress, taskId }) => {
                     </div>
                   </div>
                 ) : (
-                  <button onClick={() => setShowInput(index)} className=" border px-2 py-2 mt-2 cursor-pointer rounded-sm text-xs">
+                  <button
+                    onClick={() => setShowInput(index)}
+                    className=" border px-2 py-2 mt-2 cursor-pointer rounded-sm text-xs"
+                  >
                     New Item
                   </button>
                 )}

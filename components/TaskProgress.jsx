@@ -5,9 +5,9 @@ import { Button } from "./ui/button";
 import TaskAddInput from "./TaskAddInput";
 import DeleteProgressTask from "./DeleteProgressTask";
 import { useCustomProjectContext } from "@/context/AddCustomizeProjectContext";
-import { useTheme } from 'next-themes';
-import { toast } from "sonner"
-const TaskProgress = ({projectName}) => {
+import { useTheme } from "next-themes";
+import { toast } from "sonner";
+const TaskProgress = ({ projectName }) => {
   const {
     taskTimeLine,
     setTaskTimeLine,
@@ -19,21 +19,21 @@ const TaskProgress = ({projectName}) => {
     setTotalTask,
     allTaskTimeLine,
   } = useCustomProjectContext();
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   const addTaskPerProgress = (progress) => {
-    if(inputValue){
-
+    if (inputValue) {
       const newTask = {
         id: Date.now(),
         task: inputValue,
         comments: [],
         descriptions: [],
-        date : '',
-        attachment :[],
-        tags : [],
-        todo : [],
-        member: []
+        date: "",
+        attachment: [],
+        tags: [],
+        todo: [],
+        member: [],
       };
       setTotalTask((prev) => ({
         ...prev,
@@ -44,18 +44,18 @@ const TaskProgress = ({projectName}) => {
       setInputValue("");
       SetSaveTask(true);
       setShowInput(null);
-      toast.success('Task Added successfully!', {
-              style : {
-                color: 'green'
-              }
-            });
-    }else{
-      toast.warning('field can not be empty....',{
+      toast.success("Task Added successfully!", {
+        style: {
+          color: "green",
+        },
+      });
+    } else {
+      toast.warning("field can not be empty....", {
         style: {
           color: "red",
           fontWeight: "bold",
         },
-      })
+      });
     }
   };
 
@@ -68,7 +68,9 @@ const TaskProgress = ({projectName}) => {
       {taskTimeLine.map((singleTask, index) => (
         <div
           key={index}
-          className={` rounded-md shadow-md p-4 h-auto  ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white'}`}
+          className={` rounded-md shadow-md p-4 h-auto  ${
+            currentTheme === "dark" ? "bg-[#373B43]" : "bg-white"
+          }`}
         >
           <div className="flex justify-between">
             <div className="flex gap-1 items-center">
@@ -85,7 +87,11 @@ const TaskProgress = ({projectName}) => {
           {/* after clicking add task show the input  */}
 
           <div className="w-full ">
-          <TaskAddInput index={index} progress={singleTask.progress} projectName={projectName}/>
+            <TaskAddInput
+              index={index}
+              progress={singleTask.progress}
+              projectName={projectName}
+            />
           </div>
 
           {/* click to add task */}
@@ -95,7 +101,6 @@ const TaskProgress = ({projectName}) => {
               <Button
                 className=" rounded-xs cursor-pointer px-2 py-0"
                 onClick={() => {
-                 
                   addTaskPerProgress(singleTask.progress);
                 }}
               >

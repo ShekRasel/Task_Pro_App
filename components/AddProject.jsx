@@ -34,10 +34,10 @@ const AddProject = () => {
   const [members, setMembers] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [memberName, setMemberName] = useState("");
-const [memberPhoto, setMemberPhoto] = useState(null);
+  const [memberPhoto, setMemberPhoto] = useState(null);
 
-
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   useEffect(() => {
     input && setProjectName(input);
@@ -94,12 +94,11 @@ const [memberPhoto, setMemberPhoto] = useState(null);
     }
   };
 
-
   return (
     <Dialog className="" open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger
         className={`w-full md:w-1/2 h-44 rounded-md ${
-          theme === "dark" ? "bg-[#373B43]" : "bg-white border"
+          currentTheme === "dark" ? "bg-[#373B43]" : "bg-white border"
         }`}
       >
         <div className=" cursor-pointer gap-4 flex flex-col items-center justify-center">
@@ -110,7 +109,7 @@ const [memberPhoto, setMemberPhoto] = useState(null);
 
       <DialogContent
         className={`w-4/5  border ${
-          theme === "dark" ? "bg-[#373B43]" : "bg-white"
+          currentTheme === "dark" ? "bg-[#373B43]" : "bg-white"
         }`}
       >
         <DialogTitle className="border-b pb-4">New Project</DialogTitle>
@@ -145,14 +144,20 @@ const [memberPhoto, setMemberPhoto] = useState(null);
               />
 
               {/* Add Member Button */}
-              <Button className="px-3 rounded-xs text-xs py-0" onClick={handleAddMember}>
+              <Button
+                className="px-3 rounded-xs text-xs py-0"
+                onClick={handleAddMember}
+              >
                 Add
               </Button>
             </div>
             {/* Show Added Members List */}
             <div className=" flex gap-3">
               {members.map((member, index) => (
-                <div key={index} className="flex items-center gap-2 mt-2 bg-[#3D434C] px-0.5">
+                <div
+                  key={index}
+                  className="flex items-center gap-2 mt-2 bg-[#3D434C] px-0.5"
+                >
                   <img
                     src={member.photo}
                     alt={member.name}

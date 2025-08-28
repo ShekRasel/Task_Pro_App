@@ -5,15 +5,13 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { motion } from "motion/react";
 
-
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 const Notes = () => {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
   const [note, setNote] = useState(false);
-  const [addNote, setAddNote] = useState([
-   
-  ]);
+  const [addNote, setAddNote] = useState([]);
   const [noteValue, setNoteValue] = useState("");
   const [noteIndex, setNoteIndex] = useState(null);
 
@@ -25,7 +23,11 @@ const Notes = () => {
   };
 
   return (
-    <div className={`w-full md:w-1/2 py-4 pl-4   rounded-md ${theme === 'dark' ? 'bg-[#373B43]' : 'bg-white border'}`}>
+    <div
+      className={`w-full md:w-1/2 py-4 pl-4   rounded-md ${
+        currentTheme === "dark" ? "bg-[#373B43]" : "bg-white border"
+      }`}
+    >
       <h1
         onClick={() => setNote(true)}
         className="flex gap-2 border-b pb-2 cursor-pointer"
@@ -80,7 +82,12 @@ const Notes = () => {
             ))}
           </div>
         ) : (
-          <motion.div className="flex flex-col items-center justify-center h-64 gap-2" initial={{scale:0,opacity:0}} animate={{scale:1,opacity:1,rotate:360}} transition={{duration:1, ease:"easeInOut"}}>
+          <motion.div
+            className="flex flex-col items-center justify-center h-64 gap-2"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1, rotate: 360 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          >
             <Image
               src={"/images/empty.svg"}
               height={100}

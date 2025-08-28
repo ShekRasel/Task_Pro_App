@@ -5,12 +5,11 @@ import { useAddProjectContext } from "@/context/AddProjectContext";
 import Image from "next/image";
 import { toast } from "sonner";
 import { X } from "lucide-react";
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 const ChooseMember = ({ projectName, progress, taskId }) => {
-    
-const { theme } = useTheme();
-
+  const { theme, systemTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   const { updatedProjects } = useAddProjectContext();
   const { setMemberState, totalTask, setTotalTask } = useCustomProjectContext();
@@ -86,11 +85,17 @@ const { theme } = useTheme();
   };
 
   // Find the current task's members
-  const currentTask = totalTask[progress]?.addedTask.find((task) => task.id === taskId);
+  const currentTask = totalTask[progress]?.addedTask.find(
+    (task) => task.id === taskId
+  );
   const selectedMembers = currentTask?.member || [];
 
   return (
-    <div className={`absolute min-w-64 md:right-0 top-10 shadow-2xl max-w-96  text-sm rounded-sm ${theme === 'dark' ? 'bg-[#4b515e]' : 'bg-white border'}`}>
+    <div
+      className={`absolute min-w-64 md:right-0 top-10 shadow-2xl max-w-96  text-sm rounded-sm ${
+        currentTheme === "dark" ? "bg-[#4b515e]" : "bg-white border"
+      }`}
+    >
       <div className="py-2 border-b px-4 flex justify-between">
         <h1 className="">Add Member</h1>
         <h1
